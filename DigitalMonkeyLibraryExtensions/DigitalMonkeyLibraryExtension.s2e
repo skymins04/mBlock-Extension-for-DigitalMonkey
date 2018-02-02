@@ -1,0 +1,326 @@
+{
+	"extensionName": "디지털몽키 Extension",
+	"description": "디지털 몽키의 전용 모듈을 위한 확장",
+	"version": "1.0",
+	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
+	"homepage": "https://github.com/skymins04",
+	"sort":0,
+	"javascriptURL":"js/demo.js",
+  	"firmware":"1.0",
+  	"extensionPort":0,
+	"tags" : "digitalmonkey,arduino",
+	"blockSpecs": [
+		[ //RGB LED 모듈
+			"w",
+			"RGB LED: RGB LED %n 번 디지털 R %d.digital 번 G %d.digital 번 B %d.digital 핀으로 정하기",
+			"RGBledBegin",
+			"1",
+			"4",
+			"5",
+			"6",
+			{
+				"setup":"",
+				"inc":"#include \"RGBled.h\"\n",
+				"def":"RGBled RGBled_{0}({1},{2},{3});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"RGB LED: RGB LED %n 번 R %n 번 G %n 번 B %n 으로 켜기",
+			"setRGBlight",
+			"1",
+			"0",
+			"0",
+			"0",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"RGBled_{0}.setRGB({1},{2},{3});\n",
+				"loop":""
+			}
+		],
+		[ //신호등 LED 모듈
+			"w",
+			"신호등: 신호등 %n 번 디지털 빨간색 %d.digital 번 노란색 %d.digital 번 초록색 %d.digital 핀으로 정하기",
+			"TrafficLightBegin",
+			"1",
+			"4",
+			"5",
+			"6",
+			{
+				"setup":"",
+				"inc":"#include \"TrafficLight.h\"\n",
+				"def":"TrafficLight traffic_{0}({1},{2},{3});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"신호등: 신호등 %n 번 %d.traffic  %n 밀리초 동안 켜기",
+			"turnOnLED",
+			"1",
+			"빨간색",
+			"500",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"traffic_{0}.turnOn({1},{2});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"신호등: 신호등 %n 번 %d.traffic  %n 밀리초 동안 끄기",
+			"turnOffLED",
+			"1",
+			"빨간색",
+			"0",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"traffic_{0}.turnOff({1},{2});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"신호등: 신호등 %n 번 %d.traffic 끄고 %d.traffic  %n 밀리초 동안 켜기",
+			"OFFnON",
+			"1",
+			"빨간색",
+			"초록색",
+			"500",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"traffic_{0}.OFFnON({1},{2},{3});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"온도센서: 온도센서 %n 번 아날로그 %d.analog 핀으로 정하기",
+			"LM35begin",
+			"1",
+			"0",
+			{
+				"setup":"",
+				"inc":"#include \"TemperSen.h\"\n",
+				"def":"TemperSen TemperSen_{0}({1});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"온도센서: 온도센서 %n 번 읽기",
+			"LM35read",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"TemperSen_{0}.getTemper()",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"DC모터: DC모터 %n 번 디지털 A %d.digital B %d.digital 핀으로 정하기",
+			"DCmotorBegin",
+			"1",
+			"6",
+			"7",
+			{
+				"setup":"",
+				"inc":"#include \"DCmotor.h\"\n",
+				"def":"DCmotor DCmotor_{0}({1},{2});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"DC모터: DC모터 %n 번 속도 %n 으로 %d.direction 돌리기",
+			"turnDCmotor",
+			"1",
+			"150",
+			"시계방향으로",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"DCmotor_{0}.turnMotor({2},{1});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"DC모터: DC모터 %n 번 멈추기",
+			"stopDCmotor",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"DCmotor_{0}.stopMotor();\n",
+				"loop":""
+			}
+		],
+		[ //LCD I2C 인터페이스
+			"w",
+			"LCD: LCD %n 번 정하기, 주소: %d.addr",
+			"LCDBegin",
+			"1",
+			"0x27",
+			{
+				"setup":"lcd_{0}.init();\nlcd_{0}.backlight();\n",
+				"inc":"#include \"LiquidCrystal_I2C.h\"\n",
+				"def":"LiquidCrystal_I2C lcd_{0}({1},16,2);\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD: LCD %n 번 %s 출력하기, %d.line 번째 줄, %d.col 번째 칸",
+			"LCDPrint",
+			"1",
+			"Hello World!",
+			"0",
+			"0",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"lcd_{0}.setCursor({3},{2});\nlcd_{0}.print({1});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD: LCD %n 번 지우기",
+			"LCDClear",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"lcd_{0}.clear();\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD: LCD %n 번 백라이트 %d.power",
+			"LCDBacklight",
+			"1",
+			"켜기",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"if({1} == 1) lcd_{0}.backlight();\nelse lcd_{0}.noBacklight();",
+				"loop":""
+			}
+		],
+		[ //TM1637 FND 모듈
+			"w",
+			"FND: FND %n 번 디지털 CLK %d.digital DIO %d.digital 핀으로 정하기",
+			"FNDBegin",
+			"1",
+			"7",
+			"6",
+			{
+				"setup": "fnd_{0}.setBrightness(3);\n",
+				"inc": "#include \"TM1637Display.h\"\n",
+				"def":"TM1637Display fnd_{0}({1},{2});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"FND: FND %n 번 %d.brightness 단계로 밝기 설정하기",
+			"setBrightness",
+			"1",
+			"3",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"fnd_{0}.setBrightness({1});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"FND: FND %n 번 전원 %d.power",
+			"setPower",
+			"1",
+			"켜기",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"fnd_{0}.setBrightness(5, {1});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"FND: FND %n 번 %n 출력하기, 옵션: 빈공간 0 채우기 %d.power, %n 밀리초 기다리기",
+			"printNumber",
+			"1",
+			"2018",
+			"끄기",
+			"500",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay({3});\n",
+				"loop":""
+			}
+		]
+	],
+	"menus": {
+		"addr":["0x20","0x27","0x3f"],
+		"line":[0,1],
+		"col":[0,1,2,4,6,7,8,9,10,11,12,13,14,15],
+		"digital":[0,1,2,3,4,5,6,7,8,9,10,11,12,13],
+		"analog":[0,1,2,3,4,5,6,7],
+		"power":["끄기","켜기"],
+		"brightness":[1,2,3,4,5],
+		"traffic":["빨간색","노란색","초록색"],
+		"direction":["시계방향으로","반시계방향으로"]
+	},
+	"values":{
+		"0x20": 0x20,
+		"0x27": 0x27,
+		"0x3f": 0x3f,
+		"끄기": 0,
+		"켜기": 1,
+		"빨간색": 0,
+		"노란색": 1,
+		"초록색": 2,
+		"시계방향으로": 0,
+		"반시계방향으로": 1
+	},
+	"translators":{
+		"zh_CN":{
+			"Demo Program":"演示程序",
+			"HIGH":"高电平",
+			"LOW":"低电平",
+			"digitalWrite( %n , %d.digital )":"数字口输出( %n ,%d.digital )",
+      "blink":"闪烁"
+		}
+	}
+}
