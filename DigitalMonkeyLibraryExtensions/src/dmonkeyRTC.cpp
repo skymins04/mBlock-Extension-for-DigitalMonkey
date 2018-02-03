@@ -1,9 +1,6 @@
 #include <Arduino.h>
 #include "dmonkeyRTC.h"
 
-#include "DS1307RTC.h"
-#include "TimeLib.h"
-
 boolean dmonkeyRTC::getTime(const char *str) {
 	int Hour, Min, Sec; 
 	if (sscanf(str, "%d:%d:%d", &Hour, &Min, &Sec) != 3) return false; 

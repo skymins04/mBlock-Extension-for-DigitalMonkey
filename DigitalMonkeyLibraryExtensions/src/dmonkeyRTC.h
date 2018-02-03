@@ -2,6 +2,7 @@
 #define dmonkeyRTC_H
 
 #include "DS1307RTC.h"
+#include "TimeLib.h"
 
 class dmonkeyRTC {
 	private:

@@ -169,6 +169,128 @@
 		],
 		[
 			"h",
+			"온습도센서 모듈 블럭들",
+			"TEMPnHUMSenHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"온습도센서: 온습도센서에서 온도 읽기",
+			"TnHreadT",
+			{
+				"setup":"tempNhum.begin();\n",
+				"inc":"#include \"Adafruit_Si7021.h\"\n",
+				"def":"Adafruit_Si7021 tempNhum = Adafruit_Si7021();\n",
+				"work":"tempNhum.readTemperature()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"온습도센서: 온습도센서에서 습도 읽기",
+			"TnHreadH",
+			{
+				"setup":"tempNhum.begin();\n",
+				"inc":"#include \"Adafruit_Si7021.h\"\n",
+				"def":"Adafruit_Si7021 tempNhum = Adafruit_Si7021();\n",
+				"work":"tempNhum.readHumidity()",
+				"loop":""
+			}
+		],
+		[
+			"h",
+			"나침반센서 모듈 블럭들",
+			"compassHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":""	,
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"나침반센서: 나침반센서의 가속도계 %d.axis 축 읽기",
+			"readCompassAccel",
+			"X",
+			{
+				"setup":"",
+				"inc":"#include \"compassSen.h\"\n",
+				"def":"compassSen compass;\n",
+				"work":"compass.readAccel({0})",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"나침반센서: 나침반센서의 자력계 %d.axis 축 읽기",
+			"readCompassMag",
+			"X",
+			{
+				"setup":"",
+				"inc":"#include \"compassSen.h\"\n",
+				"def":"compassSen compass;\n",
+				"work":"compass.readMag({0})",
+				"loop":""
+			}
+		],
+		[
+			"h",
+			"RTC 모듈 블럭들",
+			"RTCHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"RTC: RTC 현재 시간과 날짜로 초기화하기",
+			"setRTC",
+			{
+				"setup":"",
+				"inc":"#include \"dmonkeyRTC.h\"\n",
+				"def":"dmonkeyRTC rtc;",
+				"work":"rtc.setRTC();",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"RTC: RTC 시간 읽기",
+			"RTCreadTime",
+			{
+				"setup":"",
+				"inc":"#include \"dmonkeyRTC.h\"\n",
+				"def":"dmonkeyRTC rtc;",
+				"work":"rtc.readTime()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"RTC: RTC 날짜 읽기",
+			"RTCreadDate",
+			{
+				"setup":"",
+				"inc":"#include \"dmonkeyRTC.h\"\n",
+				"def":"dmonkeyRTC rtc;",
+				"work":"rtc.readDate()",
+				"loop":""
+			}
+		],
+		[
+			"h",
 			"DC 모터드라이버 모듈 블럭들",
 			"TrafficLightledHead",
 			{
@@ -347,66 +469,6 @@
 				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay({3});\n",
 				"loop":""
 			}
-		],
-		[
-			"h",
-			"RTC 모듈 블럭들",
-			"RTCHead",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"",
-				"loop":""
-			}
-		],
-		[//DS1307 RTC
-			"w",
-			"RTC: RTC 시작하기",
-			"beginRTC",
-			{
-				"setup":"",
-				"inc":"#include \"dmonkeyRTC.h\"\n",
-				"def":"dmonkeyRTC rtc;",
-				"work":"",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"RTC: RTC 현제 시간과 날짜로 초기화하기",
-			"setRTC",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"rtc.setRTC();",
-				"loop":""
-			}
-		],
-		[
-			"r",
-			"RTC: RTC 시간 읽기",
-			"RTCreadTime",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"rtc.readTime()",
-				"loop":""
-			}
-		],
-		[
-			"r",
-			"RTC: RTC 날짜 읽기",
-			"RTCreadDate",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"rtc.readDate()",
-				"loop":""
-			}
 		]
 	],
 	"menus": {
@@ -418,7 +480,8 @@
 		"power":["끄기","켜기"],
 		"brightness":[1,2,3,4,5],
 		"traffic":["빨간색","노란색","초록색"],
-		"direction":["시계방향으로","반시계방향으로"]
+		"direction":["시계방향으로","반시계방향으로"],
+		"axis":["X","Y","Z"]
 	},
 	"values":{
 		"0x20": 0x20,
@@ -430,7 +493,10 @@
 		"노란색": 1,
 		"초록색": 2,
 		"시계방향으로": 0,
-		"반시계방향으로": 1
+		"반시계방향으로": 1,
+		"X": 0,
+		"Y": 1,
+		"Z": 2
 	},
 	"translators":{
 		"zh_CN":{
