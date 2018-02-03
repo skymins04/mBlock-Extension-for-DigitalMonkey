@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.0",
+	"version": "1.1",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "https://github.com/skymins04",
 	"sort":0,
@@ -10,6 +10,18 @@
   	"extensionPort":0,
 	"tags" : "digitalmonkey,arduino",
 	"blockSpecs": [
+		[
+			"h",
+			"RGB LED 모듈 블럭들",
+			"RGBledHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
 		[ //RGB LED 모듈
 			"w",
 			"RGB LED: RGB LED %n 번 디지털 R %d.digital 번 G %d.digital 번 B %d.digital 핀으로 정하기",
@@ -39,6 +51,18 @@
 				"inc":"",
 				"def":"",
 				"work":"RGBled_{0}.setRGB({1},{2},{3});\n",
+				"loop":""
+			}
+		],
+		[
+			"h",
+			"신호등 LED 모듈 블럭들",
+			"TrafficLightledHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
 				"loop":""
 			}
 		],
@@ -105,6 +129,18 @@
 			}
 		],
 		[
+			"h",
+			"온도센서 모듈 블럭들",
+			"TemperSenHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[//LM35 temperature sensor
 			"w",
 			"온도센서: 온도센서 %n 번 아날로그 %d.analog 핀으로 정하기",
 			"LM35begin",
@@ -132,6 +168,18 @@
 			}
 		],
 		[
+			"h",
+			"DC 모터드라이버 모듈 블럭들",
+			"TrafficLightledHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[ //L9110S DC 모터드라이버
 			"w",
 			"DC모터: DC모터 %n 번 디지털 A %d.digital B %d.digital 핀으로 정하기",
 			"DCmotorBegin",
@@ -171,6 +219,18 @@
 				"inc":"",
 				"def":"",
 				"work":"DCmotor_{0}.stopMotor();\n",
+				"loop":""
+			}
+		],
+		[
+			"h",
+			"LCD 모듈 블럭들",
+			"LCDHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
 				"loop":""
 			}
 		],
@@ -218,16 +278,14 @@
 			}
 		],
 		[
-			"w",
-			"LCD: LCD %n 번 백라이트 %d.power",
-			"LCDBacklight",
-			"1",
-			"켜기",
+			"h",
+			"FND 모듈 블럭들",
+			"FNDHead",
 			{
 				"setup":"",
 				"inc":"",
 				"def":"",
-				"work":"if({1} == 1) lcd_{0}.backlight();\nelse lcd_{0}.noBacklight();",
+				"work":"",
 				"loop":""
 			}
 		],
@@ -287,6 +345,66 @@
 				"inc":"",
 				"def":"",
 				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay({3});\n",
+				"loop":""
+			}
+		],
+		[
+			"h",
+			"RTC 모듈 블럭들",
+			"RTCHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[//DS1307 RTC
+			"w",
+			"RTC: RTC 시작하기",
+			"beginRTC",
+			{
+				"setup":"",
+				"inc":"#include \"dmonkeyRTC.h\"\n",
+				"def":"dmonkeyRTC rtc;",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"RTC: RTC 현제 시간과 날짜로 초기화하기",
+			"setRTC",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"rtc.setRTC();",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"RTC: RTC 시간 읽기",
+			"RTCreadTime",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"rtc.readTime()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"RTC: RTC 날짜 읽기",
+			"RTCreadDate",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"rtc.readDate()",
 				"loop":""
 			}
 		]
