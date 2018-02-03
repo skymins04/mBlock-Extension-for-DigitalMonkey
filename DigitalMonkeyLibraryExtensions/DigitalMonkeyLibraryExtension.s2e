@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2",
+	"version": "1.1",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "https://github.com/skymins04",
 	"sort":0,
@@ -341,6 +341,71 @@
 				"inc":"",
 				"def":"",
 				"work":"DCmotor_{0}.stopMotor();\n",
+				"loop":""
+			}
+		],
+		[
+			"h",
+			"IR 수신 모듈 블럭들",
+			"IRrecvHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"IR 수신: IR 수신 %n 번 디지털 %d.digital 핀으로 정하기",
+			"beginIRrecv",
+			"1",
+			"2",
+			{
+				"setup":"irrecv_{0}.enableIRIn();\n",
+				"inc":"#include \"IR.h\"\n",
+				"def":"IRrecv irrecv_{0}({1});\ndecode_results results_{0};\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"b",
+			"IR 수신: IR 수신 %n 번에 값이 들어왔는가?",
+			"checkIRrecv",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"irrecv_{0}.decode(&results_{0})",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"IR 수신: IR 수신 %n 번 읽기",
+			"readIRrecv",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"results_{0}.value",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"IR 수신: IR 수신 %n 번 재시작하기",
+			"resumeIRrecv",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"irrecv_{0}.resume();\n",
 				"loop":""
 			}
 		],
