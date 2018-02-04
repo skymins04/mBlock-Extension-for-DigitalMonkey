@@ -31,7 +31,7 @@ void dmonkeyRTC::setRTC() {
 String dmonkeyRTC::readTime() {
 	RTC.read(tm);
 	String Time = String(tm.Hour) + String(":") + String(tm.Minute) + String(":") + String(tm.Second);
-	return Time; 
+	return Time;
 }
 
 String dmonkeyRTC::readDate() {

@@ -6,9 +6,8 @@
 	"homepage": "https://github.com/skymins04",
 	"sort":0,
 	"javascriptURL":"js/demo.js",
-  	"firmware":"1.0",
-  	"extensionPort":0,
-	"tags" : "digitalmonkey,arduino",
+  "firmware":"1.0",
+  "extensionPort":0,
 	"blockSpecs": [
 		[
 			"h",
@@ -532,6 +531,35 @@
 				"inc":"",
 				"def":"",
 				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay({3});\n",
+				"loop":""
+			}
+		],
+		[
+			"h",
+			"기타 유용한 블럭들",
+			"EtcHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"맵핑: 맵핑할 값 %n , 맵핑할 값의 범위 %n ~ %n 결과값의 범위 %n ~ %n",
+			"mapping",
+			" ",
+			"0",
+			"1023",
+			"0",
+			"180",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"map({0},{1},{2},{3},{4})",
 				"loop":""
 			}
 		]
