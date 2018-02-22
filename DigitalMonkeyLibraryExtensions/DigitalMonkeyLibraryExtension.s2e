@@ -359,6 +359,7 @@
 			"w",
 			"IR 송신: IR 송신 %n 보네기",
 			"sendIRsend",
+			" ",
 			{
 				"setup":"",
 				"inc":"#include \"IR.h\"\n",
