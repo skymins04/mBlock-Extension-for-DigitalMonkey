@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2",
+	"version": "1.2.1",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "https://github.com/skymins04",
 	"sort":0,
@@ -531,6 +531,85 @@
 				"inc":"",
 				"def":"",
 				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay({3});\n",
+				"loop":""
+			}
+		],
+		[
+			"h",
+			"블루투스 모듈 블럭들",
+			"BTHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"BT: BT %n 번 디지털 TX %d.digital RX %d.digital 핀으로 정하기",
+			"BTbegin",
+			"1",
+			"2",
+			"3",
+			{
+				"setup":"bt_{0}.begin(9600);\n",
+				"inc":"",
+				"def":"SoftwareSerial bt_{0}({1},{2});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"b",
+			"BT: BT %n 번에 데이터가 들어왔는가?",
+			"BTavailable",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"bt_{0}.available()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"BT: BT %n 번의 데이터를 문자열로 읽기",
+			"BTreadString",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"String readBTstring() {String read; while(bt_{0}.available()) {read += (char)bt_{0}.read();} return read;}\n",
+				"work":"readBTstring()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"BT: BT %n 번의 데이터를 정수로 읽기",
+			"BTreadInt",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"String readBTstring() {String read; while(bt_{0}.available()) {read += (char)bt_{0}.read();} return read;}\nint readBTint() {String readData = readBTstring(); char buff[15]; readData.toCharArray(buff,readData.length()+1); int converted = atoi(buff); return converted;}\n",
+				"work":"readBTint()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"BT: BT %n 번의 데이터를 실수로 읽기",
+			"BTreadFloat",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"String readBTstring() {String read; while(bt_{0}.available()) {read += (char)bt_{0}.read();} return read;}\nfloat readBTfloat(){String readData = readBTstring(); return readData.toFloat();}\n",
+				"work":"readBTfloat()",
 				"loop":""
 			}
 		],
