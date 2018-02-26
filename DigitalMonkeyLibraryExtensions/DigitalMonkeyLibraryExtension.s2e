@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "https://github.com/skymins04",
 	"sort":0,
@@ -575,6 +575,35 @@
 			}
 		],
 		[
+			"w",
+			"BT: BT %n 번의 이름을 %s 비번을 %n 로 정하기(주의!!: 4자리수이고 맨 앞자리가 0이 나오면 안됨)",
+			"BTinit",
+			"1",
+			"HC-06",
+			"1234",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"boolean isAvailable() { unsigned long start = millis(), current = millis(); while(current - start < 1000) { if(bt_{0}.available()) return true; current = millis(); } return false; }\nvoid initialize(String Name, String PSWD) { bt_{0}.print(\"AT+NAME\"+Name); if(!isAvailable()) while(1); bt_{0}.print(\"AT+PIN\"+PSWD); if(!isAvailable()) while(1); }\n",
+				"work":"initialize({1},String({2}));",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"BT: BT %n 번의 모드를 %d.BTmode 로 정하기",
+			"BTsetMode",
+			"1",
+			"슬레이브",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"void setMode(uint8_t mode){ switch(mode) { case 0: bt_{0}.print(\"AT+ROLE=S\"); break; case 1: bt_{0}.print(\"AT+ROLE=M\"); break; }}\n",
+				"work":"setMode({1});",
+				"loop":""
+			}
+		],
+		[
 			"b",
 			"BT: BT %n 번에 데이터가 들어왔는가?",
 			"BTavailable",
@@ -595,34 +624,35 @@
 			{
 				"setup":"",
 				"inc":"",
-				"def":"String readBTstring() {String read; while(bt_{0}.available()) {read += (char)bt_{0}.read();} return read;}\n",
+				"def":"boolean isAvailable() { unsigned long start = millis(), current = millis(); while(current - start < 1000) { if(bt_{0}.available()) return true; current = millis(); } return false; }\nString readBTstring() {String read; while(isAvailable()) {read += (char)bt_{0}.read();} return read;}\n",
 				"work":"readBTstring()",
 				"loop":""
 			}
 		],
 		[
 			"r",
-			"BT: BT %n 번의 데이터를 정수로 읽기",
-			"BTreadInt",
-			"1",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"String readBTstring() {String read; while(bt_{0}.available()) {read += (char)bt_{0}.read();} return read;}\nint readBTint() {String readData = readBTstring(); char buff[15]; readData.toCharArray(buff,readData.length()+1); int converted = atoi(buff); return converted;}\n",
-				"work":"readBTint()",
-				"loop":""
-			}
-		],
-		[
-			"r",
-			"BT: BT %n 번의 데이터를 실수로 읽기",
+			"BT: BT %n 번의 데이터를 숫자로 읽기",
 			"BTreadFloat",
 			"1",
 			{
 				"setup":"",
 				"inc":"",
-				"def":"String readBTstring() {String read; while(bt_{0}.available()) {read += (char)bt_{0}.read();} return read;}\nfloat readBTfloat(){String readData = readBTstring(); return readData.toFloat();}\n",
+				"def":"boolean isAvailable() { unsigned long start = millis(), current = millis(); while(current - start < 1000) { if(bt_{0}.available()) return true; current = millis(); } return false; }\nString readBTstring() {String read; while(isAvailable()) {read += (char)bt_{0}.read();} return read;}\nfloat readBTfloat(){String readData = readBTstring(); return readData.toFloat();}\n",
 				"work":"readBTfloat()",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"BT: BT %n 번으로 %s 데이터 보네기",
+			"BTsend",
+			"1",
+			" ",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"bt_{0}.print({1});\n",
 				"loop":""
 			}
 		],
@@ -666,7 +696,8 @@
 		"brightness":[1,2,3,4,5],
 		"traffic":["빨간색","노란색","초록색"],
 		"direction":["시계방향으로","반시계방향으로"],
-		"axis":["X","Y","Z"]
+		"axis":["X","Y","Z"],
+		"BTmode":["슬레이브", "마스터"]
 	},
 	"values":{
 		"0x20": 0x20,
@@ -681,7 +712,9 @@
 		"반시계방향으로": 1,
 		"X": 0,
 		"Y": 1,
-		"Z": 2
+		"Z": 2,
+		"슬레이브": 0,
+		"마스터":1
 	},
 	"translators":{
 		"zh_CN":{
