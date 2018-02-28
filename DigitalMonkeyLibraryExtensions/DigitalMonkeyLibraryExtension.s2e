@@ -652,7 +652,7 @@
 			{
 				"setup":"",
 				"inc":"",
-				"def":"boolean isAvailable() { unsigned long start = millis(), current = millis(); while(current - start < 1000) { if(bt_{0}.available()) return true; current = millis(); } return false; }\nString readBTstring() {String read; while(isAvailable()) {read += (char)bt_{0}.read();} return read;}\n",
+				"def":"String readBTstring() {String read; while(bt_{0}.available()){ read += (char)bt_{0}.read();} return read;}\n",
 				"work":"readBTstring()",
 				"loop":""
 			}
@@ -665,7 +665,7 @@
 			{
 				"setup":"",
 				"inc":"",
-				"def":"boolean isAvailable() { unsigned long start = millis(), current = millis(); while(current - start < 1000) { if(bt_{0}.available()) return true; current = millis(); } return false; }\nString readBTstring() {String read; while(isAvailable()) {read += (char)bt_{0}.read();} return read;}\nfloat readBTfloat(){String readData = readBTstring(); return readData.toFloat();}\n",
+				"def":"String readBTstring() {String read; while(bt_{0}.available()){ read += (char)bt_{0}.read();} return read;}\nfloat readBTfloat(){String readData = readBTstring(); return readData.toFloat();}\n",
 				"work":"readBTfloat()",
 				"loop":""
 			}
