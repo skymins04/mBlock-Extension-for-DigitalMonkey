@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "https://github.com/skymins04",
 	"sort":0,
@@ -703,21 +703,21 @@
 		["-"],
 		[
 			"w",
-			"문자열 저장: 문자열 변수 %s 에 %s 저장",
+			"문자열 저장: 문자열 변수 %n 번에 %s 저장",
 			"SaveStr",
 			" ",
 			" ",
 			{
 				"setup":"",
 				"inc":"",
-				"def":"",
-				"work":"String strVar_{0} = String({1});\n",
+				"def":"String strVar_{0};\n",
+				"work":"strVar_{0} = String({1});\n",
 				"loop":""
 			}
 		],
 		[
 			"r",
-			"문자열 변수 %s",
+			"문자열 변수 %n 번",
 			"LoadStr",
 			" ",
 			{
