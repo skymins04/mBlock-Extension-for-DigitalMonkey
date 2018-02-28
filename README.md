@@ -18,4 +18,5 @@ Arduino library Extension for mBlock 에서 파생되어 아두이노 기본함�
 # 지원 함수
 ```sh
 1.map 함수
+2.문자열 저장
 ```
