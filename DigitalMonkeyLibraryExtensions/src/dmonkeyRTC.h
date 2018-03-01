@@ -3,6 +3,7 @@
 
 #include "DS1307RTC.h"
 #include "TimeLib.h"
+#include <Arduino.h>
 
 class dmonkeyRTC {
 	private:
@@ -14,6 +15,8 @@ class dmonkeyRTC {
 		void setRTC();
 		String readTime();
 		String readDate();
+		float readTimeField(uint8_t field);
+		float readDateField(uint8_t field);
 };
 
 #endif
