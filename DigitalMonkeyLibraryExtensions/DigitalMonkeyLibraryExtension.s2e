@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2.5",
+	"version": "1.2.6",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "https://github.com/skymins04",
 	"sort":0,
@@ -23,12 +23,12 @@
 		],
 		[ //RGB LED 모듈
 			"w",
-			"RGB LED: RGB LED %n 번 디지털 R %d.digital 번 G %d.digital 번 B %d.digital 핀으로 정하기",
+			"RGB LED: RGB LED %n 번을 디지털 R %d.digital 번 G %d.digital 번 B %d.digital 핀으로 정하기",
 			"RGBledBegin",
 			"1",
-			"4",
-			"5",
-			"6",
+			"11",
+			"10",
+			"9",
 			{
 				"setup":"",
 				"inc":"#include \"RGBled.h\"\n",
@@ -39,7 +39,7 @@
 		],
 		[
 			"w",
-			"RGB LED: RGB LED %n 번 R %n 번 G %n 번 B %n 으로 켜기",
+			"RGB LED: RGB LED %n 번을 R %n , G %n , B %n 으로 켜기",
 			"setRGBlight",
 			"1",
 			"0",
@@ -68,7 +68,7 @@
 		],
 		[ //신호등 LED 모듈
 			"w",
-			"신호등: 신호등 %n 번 디지털 빨간색 %d.digital 번 노란색 %d.digital 번 초록색 %d.digital 핀으로 정하기",
+			"신호등: 신호등 %n 번을 디지털 빨간색 %d.digital 번 노란색 %d.digital 번 초록색 %d.digital 핀으로 정하기",
 			"TrafficLightBegin",
 			"1",
 			"4",
@@ -84,7 +84,7 @@
 		],
 		[
 			"w",
-			"신호등: 신호등 %n 번 %d.traffic  %n 밀리초 동안 켜기",
+			"신호등: 신호등 %n 번의 %d.traffic 을 %n 밀리초 동안 켜기",
 			"turnOnLED",
 			"1",
 			"빨간색",
@@ -99,7 +99,7 @@
 		],
 		[
 			"w",
-			"신호등: 신호등 %n 번 %d.traffic  %n 밀리초 동안 끄기",
+			"신호등: 신호등 %n 번의 %d.traffic 을 %n 밀리초 동안 끄기",
 			"turnOffLED",
 			"1",
 			"빨간색",
@@ -114,7 +114,7 @@
 		],
 		[
 			"w",
-			"신호등: 신호등 %n 번 %d.traffic 끄고 %d.traffic  %n 밀리초 동안 켜기",
+			"신호등: 신호등 %n 번의 %d.traffic 을 끄고 %d.traffic 을 %n 밀리초 동안 켜기",
 			"OFFnON",
 			"1",
 			"빨간색",
@@ -143,7 +143,7 @@
 		],
 		[//LM35 temperature sensor
 			"w",
-			"온도센서: 온도센서 %n 번 아날로그 %d.analog 핀으로 정하기",
+			"온도센서: 온도센서 %n 번을 아날로그 %d.analog 핀으로 정하기",
 			"LM35begin",
 			"1",
 			"0",
@@ -221,7 +221,7 @@
 		],
 		[
 			"r",
-			"나침반센서: 나침반센서의 가속도계 %d.axis 축 읽기",
+			"나침반센서: 나침반센서의 가속도계의 %d.axis 축 읽기",
 			"readCompassAccel",
 			"X",
 			{
@@ -234,7 +234,7 @@
 		],
 		[
 			"r",
-			"나침반센서: 나침반센서의 자력계 %d.axis 축 읽기",
+			"나침반센서: 나침반센서의 자력계의 %d.axis 축 읽기",
 			"readCompassMag",
 			"X",
 			{
@@ -253,14 +253,14 @@
 			{
 				"setup":"",
 				"inc":"",
-				"def":"",
 				"work":"",
+				"def":"",
 				"loop":""
 			}
 		],
 		[
 			"w",
-			"RTC: RTC 현재 시간과 날짜로 초기화하기",
+			"RTC: RTC를 현재 시간과 날짜로 초기화하기",
 			"setRTC",
 			{
 				"setup":"",
@@ -273,7 +273,7 @@
 		["-"],
 		[
 			"r",
-			"RTC: RTC 시간 읽기",
+			"RTC: RTC의 시간 읽기",
 			"RTCreadTime",
 			{
 				"setup":"",
@@ -285,7 +285,7 @@
 		],
 		[
 			"r",
-			"RTC: RTC 날짜 읽기",
+			"RTC: RTC의 날짜 읽기",
 			"RTCreadDate",
 			{
 				"setup":"",
@@ -310,7 +310,7 @@
 		],
 		[ //L9110S DC 모터드라이버
 			"w",
-			"DC모터: DC모터 %n 번 디지털 A %d.digital B %d.digital 핀으로 정하기",
+			"DC모터: DC모터 %n 번을 디지털 A %d.digital B %d.digital 핀으로 정하기",
 			"DCmotorBegin",
 			"1",
 			"6",
@@ -325,11 +325,11 @@
 		],
 		[
 			"w",
-			"DC모터: DC모터 %n 번 속도 %n 으로 %d.direction 돌리기",
+			"DC모터: DC모터 %n 번을 속도를 %n , 방향을 %d.direction 으로 돌리기",
 			"turnDCmotor",
 			"1",
 			"150",
-			"시계방향으로",
+			"시계방향",
 			{
 				"setup":"",
 				"inc":"",
@@ -340,7 +340,7 @@
 		],
 		[
 			"w",
-			"DC모터: DC모터 %n 번 멈추기",
+			"DC모터: DC모터 %n 번을 멈추기",
 			"stopDCmotor",
 			"1",
 			{
@@ -366,7 +366,7 @@
 		],
 		[
 			"w",
-			"IR 송신: IR 송신 %n 보네기",
+			"IR 송신: IR 송신모듈로 %n 보네기 (주의!!: IR 송신모듈은 디지털 3번에만 꽂아야 합니다)",
 			"sendIRsend",
 			" ",
 			{
@@ -379,7 +379,7 @@
 		],
 		[
 			"w",
-			"IR 수신: IR 수신 %n 번 디지털 %d.digital 핀으로 정하기",
+			"IR 수신: IR 수신 %n 번을 디지털 %d.digital 핀으로 정하기",
 			"beginIRrecv",
 			"1",
 			"2",
@@ -393,7 +393,7 @@
 		],
 		[
 			"w",
-			"IR 수신: IR 수신 %n 번 재시작하기",
+			"IR 수신: IR 수신 %n 번을 재시작하기",
 			"resumeIRrecv",
 			"1",
 			{
@@ -446,7 +446,7 @@
 		],
 		[ //LCD I2C 인터페이스
 			"w",
-			"LCD: LCD %n 번 정하기, 주소: %d.addr",
+			"LCD: LCD %n 번을 주소 %d.addr 로 정하기",
 			"LCDBegin",
 			"1",
 			"0x27",
@@ -460,17 +460,17 @@
 		],
 		[
 			"w",
-			"LCD: LCD %n 번 %s 출력하기, %d.line 번째 줄, %d.col 번째 칸",
+			"LCD: LCD %n 번의 %d.line 번째 줄, %d.col 번째 칸에 %s 출력하기",
 			"LCDPrint",
 			"1",
+			"0",
+			"0",
 			"Hello World!",
-			"0",
-			"0",
 			{
 				"setup":"",
 				"inc":"",
 				"def":"",
-				"work":"lcd_{0}.setCursor({3},{2});\nlcd_{0}.print({1});\n",
+				"work":"lcd_{0}.setCursor({2},{1});\nlcd_{0}.print({3});\n",
 				"loop":""
 			}
 		],
@@ -502,7 +502,7 @@
 		],
 		[ //TM1637 FND 모듈
 			"w",
-			"FND: FND %n 번 디지털 CLK %d.digital DIO %d.digital 핀으로 정하기",
+			"FND: FND %n 번을 디지털 CLK %d.digital DIO %d.digital 핀으로 정하기",
 			"FNDBegin",
 			"1",
 			"7",
@@ -517,7 +517,7 @@
 		],
 		[
 			"w",
-			"FND: FND %n 번 %d.brightness 단계로 밝기 설정하기",
+			"FND: FND %n 번의 밝기를 %d.brightness 단계로 설정하기",
 			"setBrightness",
 			"1",
 			"3",
@@ -531,7 +531,7 @@
 		],
 		[
 			"w",
-			"FND: FND %n 번 전원 %d.power",
+			"FND: FND %n 번의 전원을 %d.power",
 			"setPower",
 			"1",
 			"켜기",
@@ -545,7 +545,7 @@
 		],
 		[
 			"w",
-			"FND: FND %n 번 %n 출력하기, 옵션: 빈공간 0 채우기 %d.power, %n 밀리초 기다리기",
+			"FND: FND %n 번에 %n 출력하기, 옵션: 빈공간 0 채우기 %d.power , %n 밀리초 기다리기",
 			"printNumber",
 			"1",
 			"2018",
@@ -574,7 +574,7 @@
 		],
 		[
 			"w",
-			"BT: BT %n 번 디지털 TX %d.digital RX %d.digital 핀으로 정하기",
+			"BT: BT %n 번을 디지털 TX %d.digital RX %d.digital 핀으로 정하기",
 			"BTbegin",
 			"1",
 			"2",
@@ -589,7 +589,7 @@
 		],
 		[
 			"w",
-			"BT: BT %n 번의 이름을 %s 비번을 %n 로 정하기(주의!!: 4자리수이고 맨 앞자리가 0이 나오면 안됨)",
+			"BT: BT %n 번의 이름을 %s 비번을 %n 로 정하기 (주의!!: 4자리수이고 맨 앞자리가 0이 나오면 안됨)",
 			"BTinit",
 			"1",
 			"HC-06",
@@ -618,7 +618,7 @@
 		],
 		[
 			"w",
-			"BT: BT %n 번으로 %s 데이터 보네기",
+			"BT: BT %n 번으로 데이터 %s 를 보네기",
 			"BTsend",
 			"1",
 			" ",
@@ -738,7 +738,7 @@
 		"power":["끄기","켜기"],
 		"brightness":[1,2,3,4,5],
 		"traffic":["빨간색","노란색","초록색"],
-		"direction":["시계방향으로","반시계방향으로"],
+		"direction":["시계방향","반시계방향"],
 		"axis":["X","Y","Z"],
 		"BTmode":["슬레이브", "마스터"]
 	},
