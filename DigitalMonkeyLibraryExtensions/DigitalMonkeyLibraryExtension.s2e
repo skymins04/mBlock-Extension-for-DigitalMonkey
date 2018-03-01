@@ -285,6 +285,19 @@
 		],
 		[
 			"r",
+			"RTC: RTC의 시간중 %d.TimeField 만 읽기",
+			"RTCreadTimeField",
+			"시",
+			{
+				"setup":"",
+				"inc":"#include \"dmonkeyRTC.h\"\n",
+				"def":"dmonkeyRTC rtc;",
+				"work":"rtc.readTimeField({0})",
+				"loop":""
+			}
+		],
+		[
+			"r",
 			"RTC: RTC의 날짜 읽기",
 			"RTCreadDate",
 			{
@@ -292,6 +305,19 @@
 				"inc":"#include \"dmonkeyRTC.h\"\n",
 				"def":"dmonkeyRTC rtc;",
 				"work":"rtc.readDate()",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"RTC: RTC의 날짜중 %d.DateField 만 읽기",
+			"RTCreadDateField",
+			"년",
+			{
+				"setup":"",
+				"inc":"#include \"dmonkeyRTC.h\"\n",
+				"def":"dmonkeyRTC rtc;",
+				"work":"rtc.readDateField({0})",
 				"loop":""
 			}
 		],
@@ -313,8 +339,8 @@
 			"DC모터: DC모터 %n 번을 디지털 A %d.digital B %d.digital 핀으로 정하기",
 			"DCmotorBegin",
 			"1",
-			"6",
-			"7",
+			"11",
+			"10",
 			{
 				"setup":"",
 				"inc":"#include \"DCmotor.h\"\n",
@@ -735,6 +761,8 @@
 		"col":[0,1,2,4,6,7,8,9,10,11,12,13,14,15],
 		"digital":[0,1,2,3,4,5,6,7,8,9,10,11,12,13],
 		"analog":[0,1,2,3,4,5,6,7],
+		"TimeField":["시","분","초"],
+		"DateField":["년","월","일"],
 		"power":["끄기","켜기"],
 		"brightness":[1,2,3,4,5],
 		"traffic":["빨간색","노란색","초록색"],
@@ -746,13 +774,19 @@
 		"0x20": 0x20,
 		"0x27": 0x27,
 		"0x3f": 0x3f,
+		"시": 0,
+		"분": 1,
+		"초": 2,
+		"년": 0,
+		"월": 1,
+		"일": 2,
 		"끄기": 0,
 		"켜기": 1,
 		"빨간색": 0,
 		"노란색": 1,
 		"초록색": 2,
-		"시계방향으로": 0,
-		"반시계방향으로": 1,
+		"시계방향": 0,
+		"반시계방향": 1,
 		"X": 0,
 		"Y": 1,
 		"Z": 2,
