@@ -644,7 +644,7 @@
 		],
 		[
 			"w",
-			"BT: BT %n 번으로 데이터 %s 를 보네기",
+			"BT: BT %n 번으로 데이터 %s 를 보내기",
 			"BTsend",
 			"1",
 			" ",
@@ -696,6 +696,83 @@
 				"loop":""
 			}
 		],
+    ["--"],
+    [
+      "h",
+      "와이파이 모듈 블럭들",
+      "WiFiHead",
+      {
+        "setup":"",
+        "inc":"",
+        "def":"",
+        "work":"",
+        "loop":""
+      }
+    ],
+    [
+      "w",
+      "Wi-Fi x ThingSpeak: Wi-Fi %n 번을 디지털 RX %d.digital, TX %d.digital 번 핀으로 정하기",
+      "createESP8266",
+      "1",
+      "2",
+      "3",
+      {
+        "setup":"esp_{0}.begin(57600);\n",
+        "inc":"",
+        "def":"SoftwareSerial esp_{0}({1},{2});\n",
+        "work":"",
+        "loop":""
+      }
+    ],
+    [
+      "w",
+      "Wi-Fi x ThingSpeak: Wi-Fi %n 번에 와이파이 연결하기, 이름 %s, 비번 %s",
+      "initESP8266",
+      "1",
+      " ",
+      " ",
+      {
+        "setup":"",
+        "inc":"",
+        "def":"String sendData(String command, const int timeout, boolean debug){ String response = \"\"; esp_{0}.print(command); long int time=millis(); while((time+timeout)>millis()){ while(esp_{0}.available()){ char c=esp_{0}.read(); response+=c; } } if(debug){ Serial.print(response); } return response; }\nString _SSID = {1};\nString _PSWD = {2};\n",
+        "work":"sendData(\"AT+RST\\r\\n\",2000,true);\nsendData(\"AT+CWMODE=1\\r\\n\",1000,true);\nsendData(\"AT+CWJAP=\\\"\"+_SSID+\"\\\",\\\"\"+_PSWD+\"\\\"\",5000,true);\n",
+        "loop":""
+      }
+    ],
+    [
+      "w",
+      "Wi-Fi x ThingSpeak: ThingSpeak write API 키 설정, %s",
+      "setWriteAPIkey",
+      " ",
+      {
+        "setup":"",
+        "inc":"",
+        "def":"String apiKey = {0};\n",
+        "work":"",
+        "loop":""
+      }
+    ],
+    [
+      "w",
+      "Wi-Fi x ThingSpeak: Wi-Fi %n 번으로 채널에 데이터 보내기, f1 %n , f2 %n , f3 %n , f4 %n , f5 %n , f6 %n , f7 %n , f8 %n",
+      "sendDataToChannel",
+      "1",
+      "null",
+      "null",
+      "null",
+      "null",
+      "null",
+      "null",
+      "null",
+      "null",
+      {
+        "setup":"",
+        "inc":"",
+        "def":"String getURL(float f1, float f2, float f3, float f4, float f5, float f6, float f7, float f8) {String URL;URL = \"GET /update?api_key=\";URL += apiKey;if(f1!=20180331) {URL +=\"&field1=\";URL += String(f1);}if(f2!=20180331) {URL +=\"&field2=\";URL += String(f2);}if(f3!=20180331) {URL +=\"&field3=\";URL += String(f3);}if(f4!=20180331) {URL +=\"&field4=\";URL += String(f4);}if(f5!=20180331) {URL +=\"&field5=\";URL += String(f5);}if(f6!=20180331) {URL +=\"&field6=\";URL += String(f6);}if(f7!=20180331) {URL +=\"&field7=\";URL += String(f7);}if(f8!=20180331) {URL +=\"&field8=\";URL += String(f8);}URL += \"\\r\\n\\r\\n\";return URL;}\nString url;\nvoid sendDataToChannel(){esp_{0}.println(\"AT+CIPSTART=\\\"TCP\\\",\\\"184.106.153.149\\\",80\");if(esp_{0}.find(\"Error\")){Serial.println(\"AT+CIPSTART error\");return;}esp_{0}.println(\"AT+CIPSEND=\"+String(url.length()));if(esp_{0}.find(\">\")) esp_{0}.print(url); else esp_{0}.println(\"AT+CIPCLOSE\");}\n",
+        "work":"url = getURL({1},{2},{3},{4},{5},{6},{7},{8});\nsendDataToChannel();\n",
+        "loop":""
+      }
+    ],
 		["--"],
 		[
 			"h",
@@ -791,7 +868,8 @@
 		"Y": 1,
 		"Z": 2,
 		"슬레이브": 0,
-		"마스터":1
+		"마스터":1,
+		"null":20180331
 	},
 	"translators":{
 		"zh_CN":{
