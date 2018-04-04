@@ -767,7 +767,7 @@
       {
         "setup":"esp_{0}.begin(57600);\n",
         "inc":"",
-        "def":"SoftwareSerial esp_{0}({3},{2});\n",
+        "def":"SoftwareSerial esp_{0}({2},{1});\n",
         "work":"",
         "loop":""
       }
