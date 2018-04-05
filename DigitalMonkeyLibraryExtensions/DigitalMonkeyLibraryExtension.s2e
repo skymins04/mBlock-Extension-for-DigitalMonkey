@@ -71,7 +71,7 @@
 		],
 		[ //RGB LED 모듈
 			"w",
-			"RGB LED: RGB LED %n 번을 디지털 R %d.digitalPin 번 G %d.digitalPin 번 B %d.digitalPin 핀으로 정하기",
+			"RGB LED: RGB LED %n 번을 디지털 R %d.digitalPin 번 G %d.digitalPin 번 B %d.digitalPin 번 핀으로 정하기",
 			"RGBledBegin",
 			"1",
 			"11",
@@ -116,7 +116,7 @@
 		],
 		[ //신호등 LED 모듈
 			"w",
-			"신호등: 신호등 %n 번을 디지털 빨간색 %d.digitalPin 번 노란색 %d.digitalPin 번 초록색 %d.digitalPin 핀으로 정하기",
+			"신호등: 신호등 %n 번을 디지털 빨간색 %d.digitalPin 번 노란색 %d.digitalPin 번 초록색 %d.digitalPin 번 핀으로 정하기",
 			"TrafficLightBegin",
 			"1",
 			"4",
@@ -191,7 +191,7 @@
 		],
 		[//LM35 temperature sensor
 			"w",
-			"온도센서: 온도센서 %n 번을 아날로그 %d.analog 핀으로 정하기",
+			"온도센서: 온도센서 %n 번을 아날로그 %d.analog 번 핀으로 정하기",
 			"LM35begin",
 			"1",
 			"0",
@@ -384,7 +384,7 @@
 		],
 		[ //L9110S DC 모터드라이버
 			"w",
-			"DC모터: DC모터 %n 번을 디지털 A %d.digitalPin B %d.digitalPin 핀으로 정하기",
+			"DC모터: DC모터 %n 번을 디지털 A %d.digitalPin 번 B %d.digitalPin 번 핀으로 정하기",
 			"DCmotorBegin",
 			"1",
 			"11",
@@ -440,7 +440,7 @@
 		],
 		[
 			"w",
-			"IR 송신: IR 송신모듈로 %n 보네기 (주의!!: IR 송신모듈은 디지털 3번에만 꽂아야 합니다)",
+			"IR 송신: IR 송신모듈로 %n 보내기 (주의!!: IR 송신모듈은 디지털 3번에만 꽂아야 합니다)",
 			"sendIRsend",
 			" ",
 			{
@@ -453,7 +453,7 @@
 		],
 		[
 			"w",
-			"IR 수신: IR 수신 %n 번을 디지털 %d.digitalPin 핀으로 정하기",
+			"IR 수신: IR 수신 %n 번을 디지털 %d.digitalPin 번 핀으로 정하기",
 			"beginIRrecv",
 			"1",
 			"2",
@@ -576,7 +576,7 @@
 		],
 		[ //TM1637 FND 모듈
 			"w",
-			"FND: FND %n 번을 디지털 CLK %d.digitalPin DIO %d.digitalPin 핀으로 정하기",
+			"FND: FND %n 번을 디지털 CLK %d.digitalPin 번 DIO %d.digitalPin 번 핀으로 정하기",
 			"FNDBegin",
 			"1",
 			"7",
@@ -648,7 +648,7 @@
 		],
 		[
 			"w",
-			"BT: BT %n 번을 디지털 TX %d.digitalPin RX %d.digitalPin 핀으로 정하기",
+			"BT: BT %n 번을 디지털 TX %d.digitalPin 번 RX %d.digitalPin 번 핀으로 정하기",
 			"BTbegin",
 			"1",
 			"2",
@@ -759,7 +759,7 @@
     ],
     [
       "w",
-      "Wi-Fi x ThingSpeak: Wi-Fi %n 번을 디지털 RX %d.digitalPin, TX %d.digitalPin 번 핀으로 정하기",
+      "Wi-Fi x ThingSpeak: Wi-Fi %n 번을 디지털 TX %d.digitalPin 번 RX %d.digitalPin 번 핀으로 정하기",
       "createESP8266",
       "1",
       "2",
@@ -767,14 +767,14 @@
       {
         "setup":"esp_{0}.begin(57600);\n",
         "inc":"",
-        "def":"SoftwareSerial esp_{0}({2},{1});\n",
+        "def":"SoftwareSerial esp_{0}({1},{2});\n",
         "work":"",
         "loop":""
       }
     ],
     [
       "w",
-      "Wi-Fi x ThingSpeak: Wi-Fi %n 번에 와이파이 연결하기, 이름 %s, 비번 %s",
+      "Wi-Fi x ThingSpeak: Wi-Fi %n 번에 와이파이 연결하기, 이름 %s , 비번 %s",
       "initESP8266",
       "1",
       " ",
