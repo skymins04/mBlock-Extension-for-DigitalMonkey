@@ -1,7 +1,6 @@
-{
-	"extensionName": "디지털몽키 Extension",
+{	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2.9",
+	"version": "1.2.10",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "https://github.com/skymins04",
 	"sort":0,
@@ -483,8 +482,8 @@
 			{
 				"setup":"",
 				"inc":"",
-				"def":"",
-				"work":"results_{0}.value",
+				"def":"int16_t readIR(unsigned long read) {switch(read) {case 0xFFA25D: return 10;	break; case 0xFF629D: return 11; break;	case 0xFFE21D: return 12; break; case 0xFF22DD: return 20; break; case 0xFF02FD: return 21;	break; case 0xFFC23D: return 22; break; case 0xFFE01F: return 30; break; case 0xFFA857: return 31; break; case 0xFF906F: return 32; break; case 0xFF9867: return 100; break; case 0xFFB04F: return 200; break; case 0xFF6897: return 0; break; case 0xFF30CF: return 1; break; case 0xFF18E7: return 2; break; case 0xFF7A85: return 3; break; case 0xFF10EF: return 4; break; case 0xFF38C7: return 5; break; case 0xFF5AA5: return 6;	break; case 0xFF42BD: return 7;	break; case 0xFF4AB5: return 8; break; case 0xFF52AD: return 9; break; default: return -1; break;}}",
+				"work":"readIR(results_{0}.value)",
 				"loop":""
 			}
 		],
@@ -861,6 +860,34 @@
 				"work":"strVar_{0}",
 				"loop":""
 			}
+		],
+		[
+			"r",
+			"문자열 %s (을)를 %s (을)를 기준으로 자르고 그것에 %n 번째 가져오기",
+			"SplitStr",
+			" ",
+			",",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"uint8_t charCount(String str, String target) { uint8_t count = 0; for(int i = 0; str[i] != \'\\0\'; i++) { if(str[i] == target[0]) count += 1; } return count; }\nString strSplit(String str, String target, uint8_t index) { uint8_t count = charCount(str, target); if(count == 0) return str; String tempStore[count+1]; uint8_t targetPos[count+2]; targetPos[count] = str.length(); uint8_t i; targetPos[0] = str.indexOf(target); for(i = 1; i < count; i++) { targetPos[i] = str.indexOf(target,targetPos[i-1]+1); } tempStore[0] = str.substring(0,targetPos[0]); for(i = 1; i < count+1; i++) { tempStore[i] = str.substring(targetPos[i-1]+1,targetPos[i]); } return tempStore[index-1]; }\n",
+				"work":"strSplit({0},{1},{2})",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"문자열 %s (을)를 숫자로 변환",
+			"convertStrToFloat",
+			" ",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "float StrToFloat(String str){String a = str; float b = str.toFloat(); return b;}",
+				"work": "StrToFloat({0})",
+				"loop": ""
+			}
 		]
 	],
 	"menus": {
@@ -877,7 +904,6 @@
 		"direction":["시계방향","반시계방향"],
 		"axis":["X","Y","Z"],
 		"BTmode":["슬레이브", "마스터"],
-		"beats":["500","250","125","1000","2000","0"],
 		"servovalue":["0","45","90","135","180"],
 		"pwmvalue":["0","50","100","150","255"],
 		"digital":["HIGH","LOW"],
@@ -885,36 +911,15 @@
 		"beats":["Half","Quarter","Eighth","Whole","Double","Zero"]
 	},
 	"values":{
-		"0x20": 0x20,
-		"0x27": 0x27,
-		"0x3f": 0x3f,
-		"시": 0,
-		"분": 1,
-		"초": 2,
-		"년": 0,
-		"월": 1,
-		"일": 2,
-		"끄기": 0,
-		"켜기": 1,
-		"빨간색": 0,
-		"노란색": 1,
-		"초록색": 2,
-		"시계방향": 0,
-		"반시계방향": 1,
-		"X": 0,
-		"Y": 1,
-		"Z": 2,
-		"슬레이브": 0,
-		"마스터":1,
+		"0x20": 32,"0x27": 39,"0x3f": 63,
+		"시": 0,"분": 1,"초": 2,
+		"년": 0,"월": 1,"일": 2,
+		"끄기": 0,"켜기": 1,
+		"빨간색": 0,"노란색": 1,"초록색": 2,
+		"시계방향": 0,"반시계방향": 1,
+		"X": 0,"Y": 1,"Z": 2,
+		"슬레이브": 0,"마스터":1,
 		"null":20180331,
-		"run":2,
-		"get":1,
-		"digital":30,
-		"analog":31,
-		"pwm":32,
-		"servo_pin":33,
-		"tone":34,
-		"timer":50,
 		"HIGH":1,"LOW":0,
 		"B0":31,"C1":33,"D1":37,"E1":41,"F1":44,"G1":49,"A1":55,"B1":62,
 			"C2":65,"D2":73,"E2":82,"F2":87,"G2":98,"A2":110,"B2":123,
