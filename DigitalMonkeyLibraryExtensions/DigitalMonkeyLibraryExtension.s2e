@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2.10",
+	"version": "1.2.11",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "https://github.com/skymins04",
 	"sort":0,
@@ -871,8 +871,8 @@
 			"1",
 			{
 				"setup":"",
-				"inc":"#include \"Strings.h\"\n",
-				"def":"",
+				"inc":"",
+				"def":"#include \"Strings.h\"\n",
 				"work":"strSplit({0},{1},{2})",
 				"loop":""
 			}
@@ -884,8 +884,8 @@
 			" ",
 			{
 				"setup":"",
-				"inc":"#include \"Strings.h\"\n",
-				"def":"",
+				"inc":"",
+				"def":"#include \"Strings.h\"\n",
 				"work":"StrToFloat({0})",
 				"loop":""
 			}
