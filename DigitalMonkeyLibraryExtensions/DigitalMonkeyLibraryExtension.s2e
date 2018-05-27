@@ -1,9 +1,9 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2.11",
+	"version": "1.2.12",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
-	"homepage": "https://github.com/skymins04",
+	"homepage": "http://digitalmonkey.kr",
 	"sort":0,
 	"javascriptURL":"js/DigitalMonkey.js",
   "firmware":"1.0",
