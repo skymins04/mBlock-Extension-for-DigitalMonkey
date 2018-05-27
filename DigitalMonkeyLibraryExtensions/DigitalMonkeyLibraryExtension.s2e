@@ -54,7 +54,7 @@
 		],
 		[ //RGB LED 모듈
 			"w",
-			"RGB LED: RGB LED %n 번을 디지털 R %d.digitalPin 번 G %d.digitalPin 번 B %d.digitalPin 번 핀으로 정하기",
+			"RGB LED: %n 번을 디지털 R %d.digitalPin G %d.digitalPin B %d.digitalPin 번 핀으로 정하기",
 			"RGBledBegin",
 			"1",
 			"11",
@@ -70,7 +70,7 @@
 		],
 		[
 			"w",
-			"RGB LED: RGB LED %n 번을 R %n , G %n , B %n 으로 켜기",
+			"RGB LED: %n 번을 R %n G %n B %n 으로 켜기",
 			"setRGBlight",
 			"1",
 			"0",
@@ -99,7 +99,7 @@
 		],
 		[ //신호등 LED 모듈
 			"w",
-			"신호등: 신호등 %n 번을 디지털 빨간색 %d.digitalPin 번 노란색 %d.digitalPin 번 초록색 %d.digitalPin 번 핀으로 정하기",
+			"신호등: %n 번을 디지털 빨간색 %d.digitalPin 노란색 %d.digitalPin 초록색 %d.digitalPin 번 핀으로 정하기",
 			"TrafficLightBegin",
 			"1",
 			"4",
@@ -115,7 +115,7 @@
 		],
 		[
 			"w",
-			"신호등: 신호등 %n 번의 %d.traffic 을 %n 밀리초 동안 켜기",
+			"신호등: %n 번의 %d.traffic 을 %n 밀리초 동안 켜기",
 			"turnOnLED",
 			"1",
 			"빨간색",
@@ -130,7 +130,7 @@
 		],
 		[
 			"w",
-			"신호등: 신호등 %n 번의 %d.traffic 을 %n 밀리초 동안 끄기",
+			"신호등: %n 번의 %d.traffic 을 %n 밀리초 동안 끄기",
 			"turnOffLED",
 			"1",
 			"빨간색",
@@ -145,7 +145,7 @@
 		],
 		[
 			"w",
-			"신호등: 신호등 %n 번의 %d.traffic 을 끄고 %d.traffic 을 %n 밀리초 동안 켜기",
+			"신호등: %n 번의 %d.traffic 을 끄고 %d.traffic 을 %n 밀리초 동안 켜기",
 			"OFFnON",
 			"1",
 			"빨간색",
@@ -174,7 +174,7 @@
 		],
 		[//LM35 temperature sensor
 			"w",
-			"온도센서: 온도센서 %n 번을 아날로그 %d.analog 번 핀으로 정하기",
+			"온도센서: %n 번을 아날로그 %d.analog 번 핀으로 정하기",
 			"LM35begin",
 			"1",
 			"0",
@@ -189,7 +189,7 @@
 		["-"],
 		[
 			"r",
-			"온도센서: 온도센서 %n 번 읽기",
+			"온도센서: %n 번 읽기",
 			"LM35read",
 			"1",
 			{
@@ -215,7 +215,7 @@
 		],
 		[
 			"r",
-			"온습도센서: 온습도센서에서 온도 읽기",
+			"온습도센서: 온도",
 			"TnHreadT",
 			{
 				"setup":"tempNhum.begin();\n",
@@ -227,7 +227,7 @@
 		],
 		[
 			"r",
-			"온습도센서: 온습도센서에서 습도 읽기",
+			"온습도센서: 습도",
 			"TnHreadH",
 			{
 				"setup":"tempNhum.begin();\n",
@@ -252,7 +252,7 @@
 		],
 		[
 			"r",
-			"나침반센서: 나침반센서의 가속도계의 %d.axis 축 읽기",
+			"나침반센서: 가속도계의 %d.axis 축",
 			"readCompassAccel",
 			"X",
 			{
@@ -265,7 +265,7 @@
 		],
 		[
 			"r",
-			"나침반센서: 나침반센서의 자력계의 %d.axis 축 읽기",
+			"나침반센서: 자력계의 %d.axis 축",
 			"readCompassMag",
 			"X",
 			{
@@ -291,7 +291,7 @@
 		],
 		[
 			"w",
-			"RTC: RTC를 현재 시간과 날짜로 초기화하기",
+			"RTC: 현재 시간과 날짜로 초기화하기",
 			"setRTC",
 			{
 				"setup":"",
@@ -304,7 +304,7 @@
 		["-"],
 		[
 			"r",
-			"RTC: RTC의 시간 읽기",
+			"RTC: 시간",
 			"RTCreadTime",
 			{
 				"setup":"",
@@ -316,7 +316,7 @@
 		],
 		[
 			"r",
-			"RTC: RTC의 시간중 %d.TimeField 만 읽기",
+			"RTC: 시간중 %d.TimeField 만 읽기",
 			"RTCreadTimeField",
 			"시",
 			{
@@ -329,7 +329,7 @@
 		],
 		[
 			"r",
-			"RTC: RTC의 날짜 읽기",
+			"RTC: 날짜",
 			"RTCreadDate",
 			{
 				"setup":"",
@@ -341,7 +341,7 @@
 		],
 		[
 			"r",
-			"RTC: RTC의 날짜중 %d.DateField 만 읽기",
+			"RTC: 날짜중 %d.DateField 만 읽기",
 			"RTCreadDateField",
 			"년",
 			{
@@ -367,7 +367,7 @@
 		],
 		[ //L9110S DC 모터드라이버
 			"w",
-			"DC모터: DC모터 %n 번을 디지털 A %d.digitalPin 번 B %d.digitalPin 번 핀으로 정하기",
+			"DC모터: %n 번을 디지털 A %d.digitalPin B %d.digitalPin 번 핀으로 정하기",
 			"DCmotorBegin",
 			"1",
 			"11",
@@ -382,7 +382,7 @@
 		],
 		[
 			"w",
-			"DC모터: DC모터 %n 번을 속도를 %n , 방향을 %d.direction 으로 돌리기",
+			"DC모터: %n 번을 속도를 %n 방향을 %d.direction 으로 돌리기",
 			"turnDCmotor",
 			"1",
 			"150",
@@ -397,7 +397,7 @@
 		],
 		[
 			"w",
-			"DC모터: DC모터 %n 번을 멈추기",
+			"DC모터: %n 번 멈추기",
 			"stopDCmotor",
 			"1",
 			{
@@ -423,7 +423,7 @@
 		],
 		[
 			"w",
-			"IR 송신: IR 송신모듈로 %n 보내기 (주의!!: IR 송신모듈은 디지털 3번에만 꽂아야 합니다)",
+			"IR 송신: %n 보내기 (주의!!: IR 송신모듈은 디지털 3번에만 꽂아야 합니다)",
 			"sendIRsend",
 			" ",
 			{
@@ -436,7 +436,7 @@
 		],
 		[
 			"w",
-			"IR 수신: IR 수신 %n 번을 디지털 %d.digitalPin 번 핀으로 정하기",
+			"IR 수신: %n 번을 디지털 %d.digitalPin 번 핀으로 정하기",
 			"beginIRrecv",
 			"1",
 			"2",
@@ -450,7 +450,7 @@
 		],
 		[
 			"w",
-			"IR 수신: IR 수신 %n 번을 재시작하기",
+			"IR 수신: %n 번 재시작하기",
 			"resumeIRrecv",
 			"1",
 			{
@@ -464,7 +464,7 @@
 		["-"],
 		[
 			"b",
-			"IR 수신: IR 수신 %n 번에 값이 들어왔는가?",
+			"IR 수신: %n 번에 값이 들어왔는가?",
 			"checkIRrecv",
 			"1",
 			{
@@ -477,7 +477,7 @@
 		],
 		[
 			"r",
-			"IR 수신: IR 수신 %n 번 읽기",
+			"IR 수신: %n 번 읽기",
 			"readIRrecv",
 			"1",
 			{
@@ -503,7 +503,7 @@
 		],
 		[ //LCD I2C 인터페이스
 			"w",
-			"LCD: LCD %n 번을 주소 %d.addr 로 정하기",
+			"LCD: %n 번을 주소 %d.addr 로 정하기",
 			"LCDBegin",
 			"1",
 			"0x27",
@@ -517,7 +517,7 @@
 		],
 		[
 			"w",
-			"LCD: LCD %n 번의 %d.line 번째 줄, %d.col 번째 칸에 %s 출력하기",
+			"LCD: %n 번의 %d.line 번째 줄, %d.col 번째 칸에 %s 출력하기",
 			"LCDPrint",
 			"1",
 			"0",
@@ -533,7 +533,7 @@
 		],
 		[
 			"w",
-			"LCD: LCD %n 번 지우기",
+			"LCD: %n 번 지우기",
 			"LCDClear",
 			"1",
 			{
@@ -559,7 +559,7 @@
 		],
 		[ //TM1637 FND 모듈
 			"w",
-			"FND: FND %n 번을 디지털 CLK %d.digitalPin 번 DIO %d.digitalPin 번 핀으로 정하기",
+			"FND: %n 번을 디지털 CLK %d.digitalPin DIO %d.digitalPin 번 핀으로 정하기",
 			"FNDBegin",
 			"1",
 			"7",
@@ -574,7 +574,7 @@
 		],
 		[
 			"w",
-			"FND: FND %n 번의 밝기를 %d.brightness 단계로 설정하기",
+			"FND: %n 번의 밝기를 %d.brightness 단계로 설정하기",
 			"setBrightness",
 			"1",
 			"3",
@@ -588,7 +588,7 @@
 		],
 		[
 			"w",
-			"FND: FND %n 번의 전원을 %d.power",
+			"FND: %n 번의 전원을 %d.power",
 			"setPower",
 			"1",
 			"켜기",
@@ -602,7 +602,7 @@
 		],
 		[
 			"w",
-			"FND: FND %n 번에 %n 출력하기, 옵션: 빈공간 0 채우기 %d.power , %n 밀리초 기다리기",
+			"FND: %n 번에 %n 출력하기, 옵션: 빈공간 0 채우기 %d.power , %n 밀리초 기다리기",
 			"printNumber",
 			"1",
 			"2018",
@@ -631,7 +631,7 @@
 		],
 		[
 			"w",
-			"BT: BT %n 번을 디지털 TX %d.digitalPin 번 RX %d.digitalPin 번 핀으로 정하기",
+			"BT: %n 번을 디지털 TX %d.digitalPin RX %d.digitalPin 번 핀으로 정하기",
 			"BTbegin",
 			"1",
 			"2",
@@ -646,7 +646,7 @@
 		],
 		[
 			"w",
-			"BT: BT %n 번의 이름을 %s 비번을 %n 로 정하기 (주의!!: 4자리수이고 맨 앞자리가 0이 나오면 안됨)",
+			"BT: %n 번의 이름을 %s 비번을 %n 로 정하기 (주의!!: 4자리수이고 맨 앞자리가 0이 나오면 안됨)",
 			"BTinit",
 			"1",
 			"HC-06",
@@ -661,7 +661,7 @@
 		],
 		[
 			"w",
-			"BT: BT %n 번의 모드를 %d.BTmode 로 정하기",
+			"BT: %n 번의 모드를 %d.BTmode 로 정하기",
 			"BTsetMode",
 			"1",
 			"슬레이브",
@@ -675,7 +675,7 @@
 		],
 		[
 			"w",
-			"BT: BT %n 번으로 데이터 %s 를 보내기",
+			"BT: %n 번으로 데이터 %s 를 보내기",
 			"BTsend",
 			"1",
 			" ",
@@ -690,7 +690,7 @@
 		["-"],
 		[
 			"b",
-			"BT: BT %n 번에 데이터가 들어왔는가?",
+			"BT: %n 번에 데이터가 들어왔는가?",
 			"BTavailable",
 			"1",
 			{
@@ -703,7 +703,7 @@
 		],
 		[
 			"r",
-			"BT: BT %n 번의 데이터를 문자열로 읽기",
+			"BT: %n 번의 데이터를 문자열로 읽기",
 			"BTreadString",
 			"1",
 			{
@@ -716,7 +716,7 @@
 		],
 		[
 			"r",
-			"BT: BT %n 번의 데이터를 숫자로 읽기",
+			"BT: %n 번의 데이터를 숫자로 읽기",
 			"BTreadFloat",
 			"1",
 			{
@@ -727,83 +727,84 @@
 				"loop":""
 			}
 		],
-    ["--"],
-    [
-      "h",
-      "와이파이 모듈 블럭들",
-      "WiFiHead",
-      {
-        "setup":"",
-        "inc":"",
-        "def":"",
-        "work":"",
-        "loop":""
-      }
-    ],
-    [
-      "w",
-      "Wi-Fi x ThingSpeak: Wi-Fi %n 번을 디지털 TX %d.digitalPin 번 RX %d.digitalPin 번 핀으로 정하기",
-      "createESP8266",
-      "1",
-      "2",
-      "3",
-      {
-        "setup":"esp_{0}.begin(57600);\n",
-        "inc":"",
-        "def":"SoftwareSerial esp_{0}({1},{2});\n",
-        "work":"",
-        "loop":""
-      }
-    ],
-    [
-      "w",
-      "Wi-Fi x ThingSpeak: Wi-Fi %n 번에 와이파이 연결하기, 이름 %s , 비번 %s",
-      "initESP8266",
-      "1",
-      " ",
-      " ",
-      {
-        "setup":"",
-        "inc":"",
-        "def":"String sendData(String command, const int timeout, boolean debug){ String response = \"\"; esp_{0}.print(command); long int time=millis(); while((time+timeout)>millis()){ while(esp_{0}.available()){ char c=esp_{0}.read(); response+=c; } } if(debug){ Serial.print(response); } return response; }\nString _SSID = {1};\nString _PSWD = {2};\n",
-        "work":"sendData(\"AT+RST\\r\\n\",2000,true);\nsendData(\"AT+CWMODE=1\\r\\n\",1000,true);\nsendData(\"AT+CWJAP=\\\"\"+_SSID+\"\\\",\\\"\"+_PSWD+\"\\\"\",5000,true);\n",
-        "loop":""
-      }
-    ],
-    [
-      "w",
-      "Wi-Fi x ThingSpeak: ThingSpeak write API 키 설정, %s",
-      "setWriteAPIkey",
-      " ",
-      {
-        "setup":"",
-        "inc":"",
-        "def":"String apiKey = {0};\n",
-        "work":"",
-        "loop":""
-      }
-    ],
-    [
-      "w",
-      "Wi-Fi x ThingSpeak: Wi-Fi %n 번으로 채널에 데이터 보내기, f1 %n , f2 %n , f3 %n , f4 %n , f5 %n , f6 %n , f7 %n , f8 %n",
-      "sendDataToChannel",
-      "1",
-      "null",
-      "null",
-      "null",
-      "null",
-      "null",
-      "null",
-      "null",
-      "null",
-      {
-        "setup":"",
-        "inc":"",
-        "def":"String getURL(float f1, float f2, float f3, float f4, float f5, float f6, float f7, float f8) {String URL;URL = \"GET /update?api_key=\";URL += apiKey;if(f1!=20180331) {URL +=\"&field1=\";URL += String(f1);}if(f2!=20180331) {URL +=\"&field2=\";URL += String(f2);}if(f3!=20180331) {URL +=\"&field3=\";URL += String(f3);}if(f4!=20180331) {URL +=\"&field4=\";URL += String(f4);}if(f5!=20180331) {URL +=\"&field5=\";URL += String(f5);}if(f6!=20180331) {URL +=\"&field6=\";URL += String(f6);}if(f7!=20180331) {URL +=\"&field7=\";URL += String(f7);}if(f8!=20180331) {URL +=\"&field8=\";URL += String(f8);}URL += \"\\r\\n\\r\\n\";return URL;}\nString url;\nvoid sendDataToChannel(){esp_{0}.println(\"AT+CIPSTART=\\\"TCP\\\",\\\"184.106.153.149\\\",80\");if(esp_{0}.find(\"Error\")){Serial.println(\"AT+CIPSTART error\");return;}esp_{0}.println(\"AT+CIPSEND=\"+String(url.length()));if(esp_{0}.find(\">\")) esp_{0}.print(url); else esp_{0}.println(\"AT+CIPCLOSE\");}\n",
-        "work":"url = getURL({1},{2},{3},{4},{5},{6},{7},{8});\nsendDataToChannel();\n",
-        "loop":""
-      }
-    ],
+		["--"],
+		[
+			"h",
+			"와이파이 모듈 블럭들",
+			"WiFiHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"Wi-Fi: %n 번을 디지털 TX %d.digitalPin RX %d.digitalPin 핀으로 정하기",
+			"createESP8266",
+			"1",
+			"2",
+			"3",
+			{
+				"setup":"esp_{0}.begin(57600);\n",
+				"inc":"",
+				"def":"SoftwareSerial esp_{0}({1},{2});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"Wi-Fi: %n 번에 와이파이 연결하기, 이름 %s , 비번 %s",
+			"initESP8266",
+			"1",
+			" ",
+			" ",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"String sendData(String command, const int timeout, boolean debug){ String response = \"\"; esp_{0}.print(command); long int time=millis(); while((time+timeout)>millis()){ while(esp_{0}.available()){ char c=esp_{0}.read(); response+=c; } } if(debug){ Serial.print(response); } return response; }\nString _SSID = {1};\nString _PSWD = {2};\n",
+				"work":"sendData(\"AT+RST\\r\\n\",2000,true);\nsendData(\"AT+CWMODE=1\\r\\n\",1000,true);\nsendData(\"AT+CWJAP=\\\"\"+_SSID+\"\\\",\\\"\"+_PSWD+\"\\\"\",5000,true);\n",
+				"loop":""
+			}
+		],
+		["-"],
+		[
+			"w",
+			"ThingSpeak: ThingSpeak write API 키 설정, %s",
+			"setWriteAPIkey",
+			" ",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"String apiKey = {0};\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"ThingSpeak: %n 번으로 채널에 데이터 보내기, f1 %n , f2 %n , f3 %n , f4 %n , f5 %n , f6 %n , f7 %n , f8 %n",
+			"sendDataToChannel",
+			"1",
+			"null",
+			"null",
+			"null",
+			"null",
+			"null",
+			"null",
+			"null",
+			"null",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"String getURL(float f1, float f2, float f3, float f4, float f5, float f6, float f7, float f8) {String URL;URL = \"GET /update?api_key=\";URL += apiKey;if(f1!=20180331) {URL +=\"&field1=\";URL += String(f1);}if(f2!=20180331) {URL +=\"&field2=\";URL += String(f2);}if(f3!=20180331) {URL +=\"&field3=\";URL += String(f3);}if(f4!=20180331) {URL +=\"&field4=\";URL += String(f4);}if(f5!=20180331) {URL +=\"&field5=\";URL += String(f5);}if(f6!=20180331) {URL +=\"&field6=\";URL += String(f6);}if(f7!=20180331) {URL +=\"&field7=\";URL += String(f7);}if(f8!=20180331) {URL +=\"&field8=\";URL += String(f8);}URL += \"\\r\\n\\r\\n\";return URL;}\nString url;\nvoid sendDataToChannel(){esp_{0}.println(\"AT+CIPSTART=\\\"TCP\\\",\\\"184.106.153.149\\\",80\");if(esp_{0}.find(\"Error\")){Serial.println(\"AT+CIPSTART error\");return;}esp_{0}.println(\"AT+CIPSEND=\"+String(url.length()));if(esp_{0}.find(\">\")) esp_{0}.print(url); else esp_{0}.println(\"AT+CIPCLOSE\");}\n",
+				"work":"url = getURL({1},{2},{3},{4},{5},{6},{7},{8});\nsendDataToChannel();\n",
+				"loop":""
+			}
+		],
 		["--"],
 		[
 			"h",
@@ -837,7 +838,7 @@
 		["-"],
 		[
 			"w",
-			"문자열 저장: 문자열 변수 %n 번에 %s 저장",
+			"문자열 변수 %n 번에 %s 저장",
 			"SaveStr",
 			" ",
 			" ",
