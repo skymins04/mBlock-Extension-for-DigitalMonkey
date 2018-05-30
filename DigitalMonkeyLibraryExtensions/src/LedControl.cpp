@@ -147,7 +147,7 @@ void LedControl::setColumn(int addr, int col, byte value) {
     if(col<0 || col>7) 
         return;
     for(int row=0;row<8;row++) {
-        val=reverse_bits(value) >> (7-row);
+        val=value >> (7-row);
         val=val & 0x01;
         setLed(addr,row,col,val);
     }
@@ -208,16 +208,6 @@ void LedControl::spiTransfer(int addr, volatile byte opcode, volatile byte data)
     //latch the data onto the display
     digitalWrite(SPI_CS,HIGH);
 } 
-
-byte LedControl::reverse_bits(byte value) { 
-    int i, k = 1; 
-    byte sum = 0; 
-    for (i = 7; i >= 0; i--) { 
-        sum += (((value >> i) & 0x01) * k); 
-        k *= 2; 
-    } 
-    return sum; 
-}
 
 byte LedControl::reverse_line(int line) {
     switch(line) {

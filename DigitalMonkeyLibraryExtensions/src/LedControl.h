@@ -65,8 +65,6 @@ class LedControl {
         /* Send out a single command to the device */
         void spiTransfer(int addr, byte opcode, byte data);
 
-        byte reverse_bits(byte value);
-
         byte reverse_line(int line);
 
         /* We keep track of the led-status for all 8 devices in this array */
