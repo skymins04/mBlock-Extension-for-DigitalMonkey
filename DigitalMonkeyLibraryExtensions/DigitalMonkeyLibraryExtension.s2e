@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2.14",
+	"version": "1.2.15",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "http://www.digitalmonkey.kr",
 	"sort":0,
@@ -193,7 +193,7 @@
 			"네오픽셀-RGB: %n 번의 LED %n 번의 색을 R: %n , G: %n , B: %n 로 정하기",
 			"neoPixelRGBsetPixelColor",
 			"1",
-			"0",
+			"1",
 			"0",
 			"0",
 			"0",
@@ -201,7 +201,7 @@
 				"setup": "",
 				"inc": "",
 				"def": "",
-				"work": "Neo_{0}.setPixelColor({1},{2},{3},{4});\n",
+				"work": "Neo_{0}.setPixelColor({1}-1,{2},{3},{4});\n",
 				"loop": ""
 			}
 		],
@@ -210,7 +210,7 @@
 			"네오픽셀-RGBW: %n 번의 LED %n 번의 색을 R: %n , G: %n , B: %n , W: %n 로 정하기",
 			"neoPixelRGBWsetPixelColor",
 			"1",
-			"0",
+			"1",
 			"0",
 			"0",
 			"0",
@@ -219,7 +219,7 @@
 				"setup": "",
 				"inc": "",
 				"def": "",
-				"work": "Neo_{0}.setPixelColor({1},{2},{3},{4},{5});\n",
+				"work": "Neo_{0}.setPixelColor({1}-1,{2},{3},{4},{5});\n",
 				"loop": ""
 			}
 		],
@@ -674,14 +674,14 @@
 			"LCD: %n 번의 %d.line 번째 줄, %d.col 번째 칸에 %s 출력하기",
 			"LCDPrint",
 			"1",
-			"0",
-			"0",
+			"1",
+			"1",
 			"Hello World!",
 			{
 				"setup":"",
 				"inc":"",
 				"def":"",
-				"work":"lcd_{0}.setCursor({2},{1});\nlcd_{0}.print({3});\n",
+				"work":"lcd_{0}.setCursor({2}-1,{1}-1);\nlcd_{0}.print({3});\n",
 				"loop":""
 			}
 		],
@@ -1048,8 +1048,8 @@
 	],
 	"menus": {
 		"addr":["0x20","0x27","0x3f"],
-		"line":[0,1],
-		"col":[0,1,2,4,6,7,8,9,10,11,12,13,14,15],
+		"line":[1,2],
+		"col":[1,2,4,6,7,8,9,10,11,12,13,14,15,16],
 		"digitalPin":[0,1,2,3,4,5,6,7,8,9,10,11,12,13],
 		"analog":[0,1,2,3,4,5,6,7],
 		"TimeField":["시","분","초"],
@@ -1060,12 +1060,12 @@
 		"direction":["시계방향","반시계방향"],
 		"axis":["X","Y","Z"],
 		"BTmode":["슬레이브", "마스터"],
-		"metrixLine":["1","2","3","4","5","6","7","8"],
+		"metrixLine":[1,2,3,4,5,6,7,8],
 		"metrixAxis":["행","열"],
 		"neopixel":["RGB","RGBW"],
-		"beats":["500","250","125","1000","2000","0"],
-		"servovalue":["0","45","90","135","180"],
-		"pwmvalue":["0","50","100","150","255"],
+		"beats":[500,250,125,1000,2000,0],
+		"servovalue":[0,45,90,135,180],
+		"pwmvalue":[0,50,100,150,255],
 		"digital":["HIGH","LOW"],
 		"notes":["C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6","C7","D7","E7","F7","G7","A7","B7","C8","D8"],
 		"beats":["Half","Quarter","Eighth","Whole","Double","Zero"]
