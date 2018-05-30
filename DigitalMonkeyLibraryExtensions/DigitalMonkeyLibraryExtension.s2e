@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2.12",
+	"version": "1.2.13",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "http://www.digitalmonkey.kr",
 	"sort":0,
@@ -39,7 +39,7 @@
 		{"encode":"{n0}","setup":"","inc":"","def":"double currentTime = 0;\ndouble lastTime = 0;\n--separator--double getLastTime(){\n\treturn currentTime = millis()/1000.0 - lastTime;\n}\n","work":"getLastTime()","loop":""}],
 		["w", "reset timer","resetTimer", "0",
 		{"encode":"{n0}","setup":"","inc":"","def":"double currentTime = 0;\ndouble lastTime = 0;\n","work":"lastTime = millis()/1000.0;\n","loop":""}],
-		["----"],
+		["---"],
 		[
 			"h",
 			"RGB LED 모듈 블럭들",
@@ -52,7 +52,7 @@
 				"loop":""
 			}
 		],
-		[ //RGB LED 모듈
+		[
 			"w",
 			"RGB LED: %n 번을 디지털 R %d.digitalPin G %d.digitalPin B %d.digitalPin 번 핀으로 정하기",
 			"RGBledBegin",
@@ -97,7 +97,7 @@
 				"loop":""
 			}
 		],
-		[ //신호등 LED 모듈
+		[
 			"w",
 			"신호등: %n 번을 디지털 빨간색 %d.digitalPin 노란색 %d.digitalPin 초록색 %d.digitalPin 번 핀으로 정하기",
 			"TrafficLightBegin",
@@ -284,7 +284,7 @@
 		],
 		[
 			"w",
-			"매트릭스: %n 번의 %d.metrixLine %d.rotation 에 %n 표시하기",
+			"매트릭스: %n 번의 %d.metrixLine %d.metrixAxis 에 %n 표시하기",
 			"PrintAtLineMerix",
 			"1",
 			"1",
@@ -326,7 +326,7 @@
 				"loop":""
 			}
 		],
-		[//LM35 temperature sensor
+		[
 			"w",
 			"온도센서: %n 번을 아날로그 %d.analog 번 핀으로 정하기",
 			"LM35begin",
@@ -519,7 +519,7 @@
 				"loop":""
 			}
 		],
-		[ //L9110S DC 모터드라이버
+		[
 			"w",
 			"DC모터: %n 번을 디지털 A %d.digitalPin B %d.digitalPin 번 핀으로 정하기",
 			"DCmotorBegin",
@@ -655,7 +655,7 @@
 				"loop":""
 			}
 		],
-		[ //LCD I2C 인터페이스
+		[
 			"w",
 			"LCD: %n 번을 주소 %d.addr 로 정하기",
 			"LCDBegin",
@@ -711,7 +711,7 @@
 				"loop":""
 			}
 		],
-		[ //TM1637 FND 모듈
+		[
 			"w",
 			"FND: %n 번을 디지털 CLK %d.digitalPin DIO %d.digitalPin 번 핀으로 정하기",
 			"FNDBegin",
@@ -1060,6 +1060,8 @@
 		"direction":["시계방향","반시계방향"],
 		"axis":["X","Y","Z"],
 		"BTmode":["슬레이브", "마스터"],
+		"metrixLine":["1","2","3","4","5","6","7","8"],
+		"metrixAxis":["행","열"],
 		"beats":["500","250","125","1000","2000","0"],
 		"servovalue":["0","45","90","135","180"],
 		"pwmvalue":["0","50","100","150","255"],
@@ -1089,6 +1091,8 @@
 		"Z": 2,
 		"슬레이브": 0,
 		"마스터":1,
+		"행": 0,
+		"열": 1,
 		"null":20180331,
 		"run":2,
 		"get":1,
