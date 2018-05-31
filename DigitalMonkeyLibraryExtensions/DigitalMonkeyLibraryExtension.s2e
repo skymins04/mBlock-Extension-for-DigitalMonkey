@@ -756,7 +756,7 @@
 		],
 		[
 			"w",
-			"FND: %n 번에 %n 출력하기, 옵션: 빈공간 0 채우기 %d.power , %n 밀리초 기다리기",
+			"FND: %n 번에 %n 출력하기, 옵션: 빈공간 0 채우기 %d.power , %n 초 기다리기",
 			"printNumber",
 			"1",
 			"2018",
@@ -766,7 +766,7 @@
 				"setup":"",
 				"inc":"",
 				"def":"",
-				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay({3});\n",
+				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay((int){3}*1000);\n",
 				"loop":""
 			}
 		],
