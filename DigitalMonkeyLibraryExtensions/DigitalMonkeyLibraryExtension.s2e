@@ -467,7 +467,7 @@
 				"setup":"",
 				"inc":"",
 				"work":"readDust((int){0}*1000)",
-				"def":"float readDust(unsigned long sampletime_ms) { if(firstDust_{0}) { starttime_{0} = millis(); firstDust_{0} = false; } while(1) { duration_{0} = pulseIn(dustPin_{0}, LOW); lowpulseoccupancy_{0} = lowpulseoccupancy_{0}+duration_{0}; if ((millis()-starttime_{0}) >= sampletime_ms)  { float ratio = lowpulseoccupancy_{0}/(sampletime_ms*10.0); float concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62; float pcsPerCF = concentration * 100; float ugm3 = pcsPerCF / 13000; if (ugm3 > 0.01 ) { lowpulseoccupancy_{0} = 0; starttime_{0} = millis(); return ugm3; } } } }",
+				"def":"float readDust(unsigned long sampletime_ms) { if(firstDust_{0}) { starttime_{0} = millis(); firstDust_{0} = false; } while(1) { duration_{0} = pulseIn(dustPin_{0}, LOW); lowpulseoccupancy_{0} = lowpulseoccupancy_{0}+duration_{0}; if ((millis()-starttime_{0}) >= sampletime_ms)  { float ratio = lowpulseoccupancy_{0}/(sampletime_ms*10.0); float concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62; float pcsPerCF = concentration * 100; float ugm3 = pcsPerCF / 13000; if (ugm3 > 0.01 ) { lowpulseoccupancy_{0} = 0; starttime_{0} = millis(); return ugm3; } else return 0.0; } } }",
 				"loop":""
 			}
 		],
@@ -802,7 +802,7 @@
 			"1",
 			"2018",
 			"끄기",
-			"500",
+			"5",
 			{
 				"setup":"",
 				"inc":"",
