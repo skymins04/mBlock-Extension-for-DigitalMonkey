@@ -1,7 +1,7 @@
 {
 	"extensionName": "디지털몽키 Extension",
 	"description": "디지털 몽키의 전용 모듈을 위한 확장",
-	"version": "1.2.15",
+	"version": "1.2.17",
 	"author": "송도중 SoftIce BetaMan강민수(skymin0417@gmail.com)",
 	"homepage": "http://www.digitalmonkey.kr",
 	"sort":0,
@@ -23,8 +23,6 @@
 		{"encode":"{d0}{d1}","setup":"pinMode({0},OUTPUT);\n","inc":"","def":"","work":"digitalWrite({0},{1});\n","loop":""}],
 		["w", "set pwm pin %n output as %d.pwmvalue","runPwm", "5", 0,
 		{"encode":"{d0}{d1}","setup":"pinMode({0},OUTPUT);\n","inc":"","def":"","work":"analogWrite({0},{1});\n","loop":""}],
-		["w", "play tone pin %n on note %d.notes beat %d.beats","runTone", "9", "C4","Half",
-		{"encode":"{d0}{s1}{s2}","setup":"pinMode({0},OUTPUT);\n","inc":"","def":"","work":"tone({0},{1},{2}); // write to buzzer\ndelay({2});\n","loop":""}],
 		["w", "set servo pin %n angle as %d.servovalue","runServoArduino", "9", 90,
 		{"encode":"{d0}{d1}","setup":"servo_{0}.attach({0}); // init pin\n","inc":"#include <Servo.h>\n","def":"Servo servo_{0};\n","work":"servo_{0}.write({1}); // write to servo\n","loop":""}],
 		["-"],
@@ -42,8 +40,8 @@
 		["---"],
 		[
 			"h",
-			"RGB LED 모듈 블럭들",
-			"RGBledHead",
+			"A: LCD 모듈 (1602) 블럭들",
+			"LCDHead",
 			{
 				"setup":"",
 				"inc":"",
@@ -54,41 +52,52 @@
 		],
 		[
 			"w",
-			"RGB LED: %n 번을 디지털 R %d.digitalPin G %d.digitalPin B %d.digitalPin 번 핀으로 정하기",
-			"RGBledBegin",
+			"LCD: %n 번을 주소 %d.addr 로 정하기",
+			"LCDBegin",
 			"1",
-			"11",
-			"10",
-			"9",
+			"0x27",
 			{
-				"setup":"",
-				"inc":"#include \"RGBled.h\"\n",
-				"def":"RGBled RGBled_{0}({1},{2},{3});\n",
+				"setup":"lcd_{0}.begin();\nlcd_{0}.backlight();\n",
+				"inc":"#include \"LiquidCrystal_I2C.h\"\n",
+				"def":"LiquidCrystal_I2C lcd_{0}({1},16,2);\n",
 				"work":"",
 				"loop":""
 			}
 		],
 		[
 			"w",
-			"RGB LED: %n 번을 R %n G %n B %n 으로 켜기",
-			"setRGBlight",
+			"LCD: %n 번의 %d.line 번째 줄, %d.col 번째 칸에 %s 출력하기",
+			"LCDPrint",
 			"1",
-			"0",
-			"0",
-			"0",
+			"1",
+			"1",
+			"Hello World!",
 			{
 				"setup":"",
 				"inc":"",
 				"def":"",
-				"work":"RGBled_{0}.setRGB({1},{2},{3});\n",
+				"work":"lcd_{0}.setCursor({2}-1,{1}-1);\nlcd_{0}.print({3});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"LCD: %n 번 지우기",
+			"LCDClear",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"lcd_{0}.clear();\n",
 				"loop":""
 			}
 		],
 		["--"],
 		[
 			"h",
-			"신호등 LED 모듈 블럭들",
-			"TrafficLightledHead",
+			"B: FND 모듈 (TM1637) 블럭들",
+			"FNDHead",
 			{
 				"setup":"",
 				"inc":"",
@@ -99,70 +108,67 @@
 		],
 		[
 			"w",
-			"신호등: %n 번을 디지털 빨간색 %d.digitalPin 노란색 %d.digitalPin 초록색 %d.digitalPin 번 핀으로 정하기",
-			"TrafficLightBegin",
+			"FND: %n 번을 디지털 CLK %d.digitalPin DIO %d.digitalPin 번 핀으로 정하기",
+			"FNDBegin",
 			"1",
-			"4",
-			"5",
+			"7",
 			"6",
 			{
-				"setup":"",
-				"inc":"#include \"TrafficLight.h\"\n",
-				"def":"TrafficLight traffic_{0}({1},{2},{3});\n",
+				"setup": "fnd_{0}.setBrightness(3);\n",
+				"inc": "#include \"TM1637Display.h\"\n",
+				"def":"TM1637Display fnd_{0}({1},{2});\n",
 				"work":"",
 				"loop":""
 			}
 		],
 		[
 			"w",
-			"신호등: %n 번의 %d.traffic 을 %n 밀리초 동안 켜기",
-			"turnOnLED",
+			"FND: %n 번의 밝기를 %d.brightness 단계로 설정하기",
+			"setBrightness",
 			"1",
-			"빨간색",
-			"500",
+			"3",
 			{
 				"setup":"",
 				"inc":"",
 				"def":"",
-				"work":"traffic_{0}.turnOn({1},{2});\n",
+				"work":"fnd_{0}.setBrightness({1});\n",
 				"loop":""
 			}
 		],
 		[
 			"w",
-			"신호등: %n 번의 %d.traffic 을 %n 밀리초 동안 끄기",
-			"turnOffLED",
+			"FND: %n 번의 전원을 %d.power",
+			"setPower",
 			"1",
-			"빨간색",
-			"0",
+			"켜기",
 			{
 				"setup":"",
 				"inc":"",
 				"def":"",
-				"work":"traffic_{0}.turnOff({1},{2});\n",
+				"work":"fnd_{0}.setBrightness(5, {1});\n",
 				"loop":""
 			}
 		],
 		[
 			"w",
-			"신호등: %n 번의 %d.traffic 을 끄고 %d.traffic 을 %n 밀리초 동안 켜기",
-			"OFFnON",
+			"FND: %n 번에 %n 출력하기, 옵션: 빈공간 0 채우기 %d.power , %n 초 기다리기",
+			"printNumber",
 			"1",
-			"빨간색",
-			"초록색",
-			"500",
+			"2018",
+			"끄기",
+			"5",
 			{
 				"setup":"",
 				"inc":"",
 				"def":"",
-				"work":"traffic_{0}.OFFnON({1},{2},{3});\n",
+				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay((int)({3}*1000));\n",
 				"loop":""
 			}
 		],
 		["--"],
 		[
 			"h",
-			"네오픽셀 모듈 블럭들",
+			"C: 네오픽셀 모듈 (WS2812, WS2812B) 블럭들",
 			"neopixelHead",
 			{
 				"setup":"",
@@ -240,8 +246,8 @@
 		["--"],
 		[
 			"h",
-			"매트릭스 모듈 블럭들",
-			"TemperSenHead",
+			"D: 매트릭스 모듈 (MAX7219 matrix) 블럭들",
+			"MatrixHead",
 			{
 				"setup":"",
 				"inc":"",
@@ -254,9 +260,9 @@
 			"w",
 			"매트릭스: 디지털 Din %d.digitalPin , CS %d.digitalPin , CLK %d.digitalPin 번 핀 으로 정하기 ( 매트릭스 개수: %n )",
 			"initMetrix",
-			"6",
-			"5",
-			"4",
+			"9",
+			"10",
+			"11",
 			"1",
 			{
 				"setup":"for(int i = 0; i < {3}; i++) {lc.shutdown(i, false);lc.setIntensity(i, 8);lc.clearDisplay(i);}\n",
@@ -316,7 +322,254 @@
 		["--"],
 		[
 			"h",
-			"온도센서 모듈 블럭들",
+			"E: RGB LED 모듈 블럭들",
+			"RGBledHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"RGB LED: %n 번을 디지털 R %d.digitalPin G %d.digitalPin B %d.digitalPin 번 핀으로 정하기",
+			"RGBledBegin",
+			"1",
+			"9",
+			"10",
+			"11",
+			{
+				"setup":"",
+				"inc":"#include \"RGBled.h\"\n",
+				"def":"RGBled RGBled_{0}({1},{2},{3});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"RGB LED: %n 번을 R %n G %n B %n 으로 켜기",
+			"setRGBlight",
+			"1",
+			"0",
+			"0",
+			"0",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"RGBled_{0}.setRGB({1},{2},{3});\n",
+				"loop":""
+			}
+		],
+		["--"],
+		[
+			"h",
+			"F: 신호등 LED 모듈 블럭들",
+			"TrafficLightledHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"신호등: %n 번을 디지털 빨간색 %d.digitalPin 노란색 %d.digitalPin 초록색 %d.digitalPin 번 핀으로 정하기",
+			"TrafficLightBegin",
+			"1",
+			"9",
+			"10",
+			"11",
+			{
+				"setup":"",
+				"inc":"#include \"TrafficLight.h\"\n",
+				"def":"TrafficLight traffic_{0}({1},{2},{3});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"신호등: %n 번의 %d.traffic 을 %n 밀리초 동안 켜기",
+			"turnOnLED",
+			"1",
+			"빨간색",
+			"500",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"traffic_{0}.turnOn({1},{2});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"신호등: %n 번의 %d.traffic 을 %n 밀리초 동안 끄기",
+			"turnOffLED",
+			"1",
+			"빨간색",
+			"0",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"traffic_{0}.turnOff({1},{2});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"신호등: %n 번의 %d.traffic 을 끄고 %d.traffic 을 %n 밀리초 동안 켜기",
+			"OFFnON",
+			"1",
+			"빨간색",
+			"초록색",
+			"500",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"traffic_{0}.OFFnON({1},{2},{3});\n",
+				"loop":""
+			}
+		],
+		["--"],
+		[
+			"h",
+			"G: DC 모터 모듈 (L9110H) 블럭들",
+			"DCmotorHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"DC모터: %n 번을 디지털 A %d.digitalPin B %d.digitalPin 번 핀으로 정하기",
+			"DCmotorBegin",
+			"1",
+			"11",
+			"10",
+			{
+				"setup":"",
+				"inc":"#include \"DCmotor.h\"\n",
+				"def":"DCmotor DCmotor_{0}({1},{2});\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"DC모터: %n 번을 속도를 %n 방향을 %d.direction 으로 돌리기",
+			"turnDCmotor",
+			"1",
+			"150",
+			"시계방향",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"DCmotor_{0}.turnMotor({2},{1});\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"DC모터: %n 번 멈추기",
+			"stopDCmotor",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"DCmotor_{0}.stopMotor();\n",
+				"loop":""
+			}
+		],
+		["--"],
+		[
+			"h",
+			"H: 스텝모터 모듈 (28BYJ-48 & UNL2003) 블럭들",
+			"StepMotorHead",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"스텝모터: %n 번을 디지털 IN1 %d.digitalPin , IN2 %d.digitalPin , IN3 %d.digitalPin , IN4 %d.digitalPin 번 핀으로 정하기",
+			"stepperMultibegin",
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			{
+				"setup": "",
+				"inc": "#include \"StepperMulti.h\"\n",
+				"def": "StepperMulti stepper_{0}(2080,{4},{2},{3},{1});\n",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"스텝모터: %n 번의 속도를 %n 로 설정하기",
+			"setStepperSpeed",
+			"1",
+			"10",
+			{
+				"setup": "stepper_{0}.setSpeed({1});\n",
+				"inc": "",
+				"def": "",
+				"work": "",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"스텝모터: %n 번의 각도를 %n 로 설정하기",
+			"setAngle",
+			"1",
+			"0",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "stepper_{0}.setStep({1});\n",
+				"loop": ""
+			}
+		],
+		[
+			"w",
+			"스텝모터: %n 번을 움직이기",
+			"moveStep",
+			"1",
+			{
+				"setup": "",
+				"inc": "",
+				"def": "",
+				"work": "stepper_{0}.moveStep();\n",
+				"loop": ""
+			}
+		],
+		["--"],
+		[
+			"h",
+			"I: 온도센서 모듈 (LM35) 블럭들",
 			"TemperSenHead",
 			{
 				"setup":"",
@@ -357,7 +610,7 @@
 		["--"],
 		[
 			"h",
-			"온습도센서 모듈 블럭들",
+			"J: 온습도센서 모듈 (SI7021) 블럭들",
 			"TEMPnHUMSenHead",
 			{
 				"setup":"",
@@ -394,7 +647,7 @@
 		["--"],
 		[
 			"h",
-			"나침반센서 모듈 블럭들",
+			"K: 나침반센서 모듈 (LSM303DH) 블럭들",
 			"compassHead",
 			{
 				"setup":"",
@@ -433,7 +686,7 @@
 		["--"],
 		[
 			"h",
-			"미세먼지센서 모듈 블럭들",
+			"L: 미세먼지센서 모듈 (Grove, Sharp) 블럭들",
 			"DustHead",
 			{
 				"setup":"",
@@ -445,8 +698,8 @@
 		],
 		[
 			"w",
-			"미세먼지센서: %n 번을 디지털 %d.digitalPin 번 핀으로 정하기",
-			"DustInit",
+			"Grove 미세먼지센서: %n 번을 디지털 %d.digitalPin 번 핀으로 정하기",
+			"GroveDustInit",
 			"1",
 			"8",
 			{
@@ -459,22 +712,51 @@
 		],
 		[
 			"r",
-			"미세먼지센서: %n 번의 %n 초 동안에 미세먼지",
-			"DustRead",
+			"Grove 미세먼지센서: %n 번의 %d.sensorTime 초 동안에 미세먼지",
+			"GroveDustRead",
 			"1",
 			"15",
 			{
 				"setup":"",
 				"inc":"",
-				"work":"readDust((int)({0}*1000))",
+				"work":"readDust((int)({1}*1000))",
 				"def":"float readDust(unsigned long sampletime_ms) { if(firstDust_{0}) { starttime_{0} = millis(); firstDust_{0} = false; } while(1) { duration_{0} = pulseIn(dustPin_{0}, LOW); lowpulseoccupancy_{0} = lowpulseoccupancy_{0}+duration_{0}; if ((millis()-starttime_{0}) >= sampletime_ms)  { float ratio = lowpulseoccupancy_{0}/(sampletime_ms*10.0); float concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62; float pcsPerCF = concentration * 100; float ugm3 = pcsPerCF / 13000; if (ugm3 > 0.01 ) { lowpulseoccupancy_{0} = 0; starttime_{0} = millis(); return ugm3; } else return 0.0; } } }",
 				"loop":""
 			}
 		],
+		["-"],
+		[
+			"w", 
+			"Sharp 미세먼지센서: %n 번을 LED %d.digitalPin , 아날로그 %d.digitalPin 번 핀으로 정하기",
+			"SharpDustInit", 
+			"1",
+			"5", 
+			"1",
+			{ 
+			  	"inc":"#include \"GP2Y1010AU0F.h\"\n",
+			  	"def":"GP2Y1010AU0F_{0} GP2Y1010AU0F({1}, {2});\n",
+			  	"setup":"",
+			  	"work":"",
+			  	"loop":""
+			}
+		],
+		[
+			"r", 
+			"Sharp 미세먼지센서: %n 번의 미세먼지농도 읽기",
+			"SharpDustRead",
+			"1",
+		 	{ 
+				"setup":"",
+		   		"inc":"",
+		   		"def":"",
+	            "work":"GP2Y1010AU0F_{0}.getDustDensity(GP2Y1010AU0F.getOutputV())",
+		    	"loop":""
+		  	}
+		],
 		["--"],
 		[
 			"h",
-			"RTC 모듈 블럭들",
+			"M: RTC 모듈 (DS1307) 블럭들",
 			"RTCHead",
 			{
 				"setup":"",
@@ -550,63 +832,7 @@
 		["--"],
 		[
 			"h",
-			"DC 모터드라이버 모듈 블럭들",
-			"TrafficLightledHead",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"DC모터: %n 번을 디지털 A %d.digitalPin B %d.digitalPin 번 핀으로 정하기",
-			"DCmotorBegin",
-			"1",
-			"11",
-			"10",
-			{
-				"setup":"",
-				"inc":"#include \"DCmotor.h\"\n",
-				"def":"DCmotor DCmotor_{0}({1},{2});\n",
-				"work":"",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"DC모터: %n 번을 속도를 %n 방향을 %d.direction 으로 돌리기",
-			"turnDCmotor",
-			"1",
-			"150",
-			"시계방향",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"DCmotor_{0}.turnMotor({2},{1});\n",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"DC모터: %n 번 멈추기",
-			"stopDCmotor",
-			"1",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"DCmotor_{0}.stopMotor();\n",
-				"loop":""
-			}
-		],
-		["--"],
-		[
-			"h",
-			"IR 송수신 모듈 블럭들",
+			"N: IR 송수신 모듈 블럭들",
 			"IRHead",
 			{
 				"setup":"",
@@ -686,135 +912,7 @@
 		["--"],
 		[
 			"h",
-			"LCD 모듈 블럭들",
-			"LCDHead",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"LCD: %n 번을 주소 %d.addr 로 정하기",
-			"LCDBegin",
-			"1",
-			"0x27",
-			{
-				"setup":"lcd_{0}.begin();\nlcd_{0}.backlight();\n",
-				"inc":"#include \"LiquidCrystal_I2C.h\"\n",
-				"def":"LiquidCrystal_I2C lcd_{0}({1},16,2);\n",
-				"work":"",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"LCD: %n 번의 %d.line 번째 줄, %d.col 번째 칸에 %s 출력하기",
-			"LCDPrint",
-			"1",
-			"1",
-			"1",
-			"Hello World!",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"lcd_{0}.setCursor({2}-1,{1}-1);\nlcd_{0}.print({3});\n",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"LCD: %n 번 지우기",
-			"LCDClear",
-			"1",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"lcd_{0}.clear();\n",
-				"loop":""
-			}
-		],
-		["--"],
-		[
-			"h",
-			"FND 모듈 블럭들",
-			"FNDHead",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"FND: %n 번을 디지털 CLK %d.digitalPin DIO %d.digitalPin 번 핀으로 정하기",
-			"FNDBegin",
-			"1",
-			"7",
-			"6",
-			{
-				"setup": "fnd_{0}.setBrightness(3);\n",
-				"inc": "#include \"TM1637Display.h\"\n",
-				"def":"TM1637Display fnd_{0}({1},{2});\n",
-				"work":"",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"FND: %n 번의 밝기를 %d.brightness 단계로 설정하기",
-			"setBrightness",
-			"1",
-			"3",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"fnd_{0}.setBrightness({1});\n",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"FND: %n 번의 전원을 %d.power",
-			"setPower",
-			"1",
-			"켜기",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"fnd_{0}.setBrightness(5, {1});\n",
-				"loop":""
-			}
-		],
-		[
-			"w",
-			"FND: %n 번에 %n 출력하기, 옵션: 빈공간 0 채우기 %d.power , %n 초 기다리기",
-			"printNumber",
-			"1",
-			"2018",
-			"끄기",
-			"5",
-			{
-				"setup":"",
-				"inc":"",
-				"def":"",
-				"work":"fnd_{0}.showNumberDec({1},{2});\ndelay((int)({3}*1000));\n",
-				"loop":""
-			}
-		],
-		["--"],
-		[
-			"h",
-			"블루투스 모듈 블럭들",
+			"O: 블루투스 모듈 (HC-06) 블럭들",
 			"BTHead",
 			{
 				"setup":"",
@@ -826,7 +924,7 @@
 		],
 		[
 			"w",
-			"BT: %n 번을 디지털 TX %d.digitalPin RX %d.digitalPin 번 핀으로 정하기",
+			"HC-06 BT: %n 번을 디지털 TX %d.digitalPin RX %d.digitalPin 번 핀으로 정하기",
 			"BTbegin",
 			"1",
 			"2",
@@ -841,7 +939,7 @@
 		],
 		[
 			"w",
-			"BT: %n 번의 이름을 %s 비번을 %n 로 정하기 (주의!!: 4자리수이고 맨 앞자리가 0이 나오면 안됨)",
+			"HC-06 BT: %n 번의 이름을 %s 비번을 %n 로 정하기 (주의!!: 4자리수이고 맨 앞자리가 0이 나오면 안됨)",
 			"BTinit",
 			"1",
 			"HC-06",
@@ -856,7 +954,7 @@
 		],
 		[
 			"w",
-			"BT: %n 번의 모드를 %d.BTmode 로 정하기",
+			"HC-06 BT: %n 번의 모드를 %d.BTmode 로 정하기",
 			"BTsetMode",
 			"1",
 			"슬레이브",
@@ -870,7 +968,7 @@
 		],
 		[
 			"w",
-			"BT: %n 번으로 데이터 %s 를 보내기",
+			"HC-06 BT: %n 번으로 데이터 %s 를 보내기",
 			"BTsend",
 			"1",
 			" ",
@@ -885,7 +983,7 @@
 		["-"],
 		[
 			"b",
-			"BT: %n 번에 데이터가 들어왔는가?",
+			"HC-06 BT: %n 번에 데이터가 들어왔는가?",
 			"BTavailable",
 			"1",
 			{
@@ -898,7 +996,7 @@
 		],
 		[
 			"r",
-			"BT: %n 번의 데이터를 문자열로 읽기",
+			"HC-06 BT: %n 번의 데이터를 문자열로 읽기",
 			"BTreadString",
 			"1",
 			{
@@ -911,7 +1009,7 @@
 		],
 		[
 			"r",
-			"BT: %n 번의 데이터를 숫자로 읽기",
+			"HC-06 BT: %n 번의 데이터를 숫자로 읽기",
 			"BTreadFloat",
 			"1",
 			{
@@ -925,7 +1023,7 @@
 		["--"],
 		[
 			"h",
-			"와이파이 모듈 블럭들",
+			"P: 와이파이 모듈 (ESP-12E) 블럭들",
 			"WiFiHead",
 			{
 				"setup":"",
@@ -1018,6 +1116,130 @@
 		["--"],
 		[
 			"h",
+			"Q: MP3 모듈 (KT403A) 블록들",
+			"mp3Init",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w", 
+			"MP3: TX %d.digitalPin , RX %d.digitalPin 번 핀으로 정하기",
+			"initMP3",
+			"2", 
+			"3",
+		 	{
+				"inc":"#include \"MP3Player_KT403A.h\"\n",
+		   		"def":"SoftwareSerial mp3({0}, {1});\n",
+		   		"setup":"mp3.begin(9600);\ndelay(100);\nSelectPlayerDevice(0x02);\nSetVolume(0x0E);\n",
+	            "work":"",
+		    	"loop":""
+		  	}
+		],
+		[
+			"w", 
+			"MP3: %n 번곡 실행",
+			"playMP3", 
+			"1",
+		 	{
+				"inc":"",
+		   		"def":"",
+		   		"setup":"",
+	            "work":"SpecifyMusicPlay({0}+1);\n",
+		    	"loop":""
+		  	}
+		],
+		[
+			"w",
+			"MP3: 잠시멈춤",
+			"pauseMP3",
+		 	{ 
+				"inc":"",
+		   		"def":"",
+		   		"setup":"",
+	            "work":"PlayPause();\n",
+		    	"loop":""
+		  	}
+		],
+		[
+			"w", 
+			"MP3: 다시시작",
+			"resumeMP3",
+		 	{
+				"inc":"",
+		   		"def":"",
+		   		"setup":"",
+	            "work":"PlayResume();\n",
+		    	"loop":""
+		  	}
+		],
+		[
+			"w", 
+			"MP3: 다음곡",
+			"nextMP3",
+		 	{
+				"inc":"",
+		  	 	"def":"",
+		   		"setup":"",
+	            "work":"PlayNext();\n",
+		    	"loop":""
+		  	}
+		],
+		[
+			"w", 
+			"MP3: 이전곡",
+			"previousMP3",
+		 	{
+				"inc":"",
+		   		"def":"",
+		   		"setup":"",
+	            "work":"PlayPrevious();\n",
+		    	"loop":""
+		  	}
+		],
+		[
+			"w", 
+			"MP3: 모든곡 반복재생",
+			"loopMP3",
+		 	{
+				"inc":"",
+		   		"def":"",
+		   		"setup":"",
+	            "work":"PlayLoop();\n",
+		    	"loop":""
+		  	}
+		],
+		[
+			"w", 
+			"MP3: 소리올림",
+			"increaseVolumeMP3",
+		 	{
+				"inc":"",
+		   		"def":"",
+		   		"setup":"",
+	            "work":"IncreaseVolume();\n",
+		    	"loop":""
+		  	}
+		],
+		[
+			"w", 
+			"MP3: 소리내림",
+			"decreaseVolumeMP3",
+		 	{
+				"inc":"",
+		   		"def":"",
+		   		"setup":"",
+	            "work":"DecreaseVolume();\n",
+		    	"loop":""
+		  	}
+		],
+		["--"],
+		[
+			"h",
 			"기타 유용한 블럭들",
 			"EtcHead",
 			{
@@ -1042,6 +1264,33 @@
 				"inc":"",
 				"def":"",
 				"work":"map({0},{1},{2},{3},{4})",
+				"loop":""
+			}
+		],
+		["-"],
+		[
+			"r",
+			"숫자로된 문자열 %n",
+			"Serial",
+			"1234",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"\"{0}\"",
+				"loop":""
+			}
+		],
+		[
+			"r",
+			"숫자로된 문자 %n",
+			"Serial1",
+			"1",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"'{0}'",
 				"loop":""
 			}
 		],
@@ -1105,7 +1354,7 @@
 	"menus": {
 		"addr":["0x20","0x27","0x3f"],
 		"line":[1,2],
-		"col":[1,2,4,6,7,8,9,10,11,12,13,14,15,16],
+		"col":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
 		"digitalPin":[0,1,2,3,4,5,6,7,8,9,10,11,12,13],
 		"analog":[0,1,2,3,4,5,6,7],
 		"TimeField":["시","분","초"],
@@ -1119,6 +1368,7 @@
 		"metrixLine":[1,2,3,4,5,6,7,8],
 		"metrixAxis":["행","열"],
 		"neopixel":["RGB","RGBW"],
+		"sensorTime":[15,30,60],
 		"beats":[500,250,125,1000,2000,0],
 		"servovalue":[0,45,90,135,180],
 		"pwmvalue":[0,50,100,150,255],
@@ -1138,9 +1388,9 @@
 		"일": 2,
 		"끄기": 0,
 		"켜기": 1,
-		"빨간색": 0,
+		"빨간색": 2,
 		"노란색": 1,
-		"초록색": 2,
+		"초록색": 0,
 		"시계방향": 0,
 		"반시계방향": 1,
 		"X": 0,
@@ -1148,8 +1398,8 @@
 		"Z": 2,
 		"슬레이브": 0,
 		"마스터":1,
-		"행": 1,
-		"열": 0,
+		"행": 0,
+		"열": 1,
 		"RGB": 1,
 		"RGBW": 0,
 		"null":20180331,

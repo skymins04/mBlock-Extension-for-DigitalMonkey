@@ -8,31 +8,33 @@ Arduino library Extension for mBlock 에서 파생되어 아두이노 기본함�
 
 # Supported modules
 ```sh
-1.RGB LED
-2.신호등 LED
-3.NeoPixel(RGB, RGBW)
-4.8x8 LED 매트릭스
-5.LM35 (on Amp)
-6.Si7021 온습도센서
-7.LSM303 가속도계 + 자력계 센서
-8.PPD42 그로브 먼지센서
-9.DS1307 tiny RTC
-10.L9110S DC 모터 드라이버
-11.IR 송신 
-12.IR 수신 모듈
-13.LCD I2C 인터페이스
-14.TM1637 7-세그먼트 FND
-15.HC-06 블루투스 모듈
-16.ESP8266 시리즈 와이파이 모듈(baud:57600)
+1.LCD (1602)
+2.FND (TM1637)
+3.NeoPixel (WS2812, WS2812B)
+4.Matrix Module (MAX7219)
+5.DC Motor (L9110H)
+6.Step Motor (28BYJ-48 & UNL2003)
+7.Temperature Sensor (LM35)
+8.Temp&Hum Sensor (SI7021)
+9.Compass Sensor (LSM303DH)
+10.Grove Dust Sensor
+11.Sharp Dust Sensor
+12.RTC Module (DS1307)
+13.IR RX TX Module
+14.BlueTooth Module (HC-06)
+15.WiFi Module (ESP-12E)
+16.MP3 Module (KT403A)
 ```
 
 # Supported functions
 ```sh
 1.map 함수
-2.문자열 저장 변수
-3.문자열 변수 로드
-4.문자열 분리
-5.문자열 to 실수 
+2.NumberStr
+3.NumberCha
+4.문자열 저장 변수
+5.문자열 변수 로드
+6.문자열 분리
+7.문자열 to 실수 
 ```
 
 # Forum
